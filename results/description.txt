@@ -1,0 +1,1 @@
+This directory is for storing result files and generated figures.
