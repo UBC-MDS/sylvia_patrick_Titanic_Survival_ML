@@ -12,7 +12,7 @@ We will do an analysis on the data set from [Kaggle's Titanic:Machine Learning f
 
 To prove that we can load the dataset, we have created a `data_import.py` Python script to read and import the `training.csv` dataset. The script can be found in the `src` directory.
 
-**Research Question:** What are the strongest predictors of people who survived on the Titanic?
+**Research Question:** What are the 3 strongest predictors of people who survived on the Titanic?
 
 This is a predictive research question, so we will be implementing a classification decision tree model. 
 
