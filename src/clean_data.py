@@ -33,11 +33,9 @@ def main():
     # Drop columns that we are not interested in
     titanic_train = titanic_train.loc[:,["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Survived"]]
     titanic_test = titanic_test.loc[:,["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare"]]
-    print(titanic_train.head())
 
     #Add Survived column to test data
     titanic_test = titanic_test.join(gender_submission)
-    print(titanic_test.head())
 
     #Process data
     fillNAN([titanic_train, titanic_test])
@@ -49,17 +47,15 @@ def main():
     titanic_test.to_csv(args.cleaned_test)
     print("Clean data exported")
 
-# Replace NaN values
+#calculate statistical center of "age" and "fare"
 def calcNAN(df):
     return {'Age': df.Age.mean(), 'Fare': df.Fare.median()}
 
+# Replace NaN values in df with statistical center of column variable
 def fillNAN(df):
-    print(df)
     values = calcNAN(df[0])
     for i in df:
         i.fillna(value=values, inplace = True)
-
-#fillNAN([titanic_train, titanic_test])
 
 # Replace Sex to 1 or 0
 def process_sex(df):
