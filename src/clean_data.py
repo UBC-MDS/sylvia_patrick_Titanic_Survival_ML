@@ -8,7 +8,7 @@
 #              and joined gender_submission.csv with test.csv
 
 # Usage: python clean_data.py <train.csv path> <test.csv path> <gender_submission.csv path>
-#        <clean_train path> <clean_test path>
+#        <clean_train.csv path> <clean_test.csv path> <clean_total.csv path>
 
 import argparse
 import pandas as pd
