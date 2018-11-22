@@ -1,10 +1,14 @@
+#!/usr/bin/env python
+
 # clean_data.py
 # Patrick Tung, Sylvia Lee (Nov 22, 2018)
-#
-# This script takes in the raw titanic datasets and clean it for
-# future analyses.
-#
-# Usage: python clean_data.py
+
+# Description: This script takes in the raw titanic datasets and clean it for
+#              future analyses. Cleaning includes removing un-need data, fill NaN elements
+#              and joined gender_submission.csv with test.csv
+
+# Usage: python clean_data.py <train.csv path> <test.csv path> <gender_submission.csv path>
+#        <clean_train path> <clean_test path>
 
 import argparse
 import pandas as pd
