@@ -12,14 +12,15 @@
 # Usage: python data_analysis.py <cleaned_train.csv path> <cleaned_test.csv path> <output_folder path/>
 # Example: python data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
 
+# Load dependencies
 import argparse
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.model_selection import cross_val_score
 import pickle
 
+# Parse input arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("training_data")
 parser.add_argument("testing_data")
@@ -53,12 +54,12 @@ def main():
     predicted_test = predict(tree, Xtest, titanic_test)
 
     # Export predictions to csv
-    pickle.dump(tree, open(args.output_folder + "classification_tree_model.sav", "wb"))
+    pickle.dump(tree, open(args.output_folder + "model/decision_tree_model.sav", "wb"))
     predicted_train.to_csv(args.output_folder+"train_predictions.csv")
     predicted_test.to_csv(args.output_folder+"test_predictions.csv")
     print("Exports complete")
 
-    return tree
+
 
 # Description: split the data sets into a X-feature set and y-target sets
 # Parameter:   data(dataframe) = dataframe with target being in the last column named "Survived"
