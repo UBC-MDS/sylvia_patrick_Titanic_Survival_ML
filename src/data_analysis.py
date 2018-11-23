@@ -28,7 +28,7 @@ def main():
     Xtest, ytest = split_data(titanic_test)
 
     # Cross Validation to find the best max_depth for decision classification tree
-    best_depth = cross_validate(Xtrain, ytrain)
+    best_depth = calc_depth(Xtrain, ytrain)
     print(best_depth)
 
     # Create decision tree and fit model
@@ -46,17 +46,13 @@ def main():
     # Rank the most predictive features
     features = list(Xtrain)
     feature_rank_df = feature_rank(tree, features)
-    print(feature_rank_df)
-    # Export predictions to csv?
-    # tree_predict.to_csv("predictions.csv")
-
 
 def split_data(data):
     X = data.iloc[:, 0:-1]
     y = data.Survived
     return(X, y)
 
-def cross_validate(Xtrain,ytrain):
+def calc_depth(Xtrain,ytrain):
     max_depths = range(1, 50)
 
     accuracies = []
@@ -86,16 +82,19 @@ def get_accuracies(df, set_name):
     accuracy = round(correct_predictions / total, 4)
     return([set_name, total, correct_predictions, incorrect_predictions, accuracy])
 
-# Feature ranking
 def feature_rank(tree, features):
-    importances = tree.feature_importances_
+    importances = calc_importances(tree)
     importance_indices = importances.argsort()[::-1]
 
     feature_rank_df = pd.DataFrame(columns = ['Rank', 'Feature', 'Importance'])
 
     for i in range(len(features)):
         feature_rank_df.loc[i] = [i+1, features[importance_indices[i]], importances[importance_indices[i]]]
-        #print("Rank {}. {} ({})".format(i+1, tree_predict.columns[importance_indices[i]], importances[importance_indices[i]]))
 
     return(feature_rank_df)
-main()
+
+def calcImportances(model):
+    return model.feature_importances_
+
+if __name__ == "__main__":
+    main()
