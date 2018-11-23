@@ -3,13 +3,14 @@
 # data_analysis.py
 # Patrick Tung, Sylvia Lee (Nov 22, 2018)
 
-# Description: This script takes in the cleaned titanic datasets and fits a 
-#              decision tree to predict which passengers survived the Titanic. 
+# Description: This script takes in the cleaned titanic datasets and fits a
+#              decision tree to predict which passengers survived the Titanic.
 #              This includes cross validating decision trees to determine
 #              the value for hyperparameters. It then returns the top three
-#              most important features. 
+#              most important features.
 
-# Usage: python data_analysis.py <train.csv path> <test.csv path> <output_folder path>
+# Usage: python data_analysis.py <cleaned_train.csv path> <cleaned_test.csv path> <output_folder path/>
+# Example: python data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
 
 import argparse
 import pandas as pd
@@ -17,6 +18,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.model_selection import cross_val_score
+import pickle
+
+parser = argparse.ArgumentParser()
+parser.add_argument("training_data")
+parser.add_argument("testing_data")
+parser.add_argument("output_folder")
+args = parser.parse_args()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('training_data')
@@ -43,19 +51,29 @@ def main():
     # Predict using train and test set
     predicted_train = predict(tree, Xtrain, titanic_train)
     predicted_test = predict(tree, Xtest, titanic_test)
-    
+
     # Export predictions to csv
+    pickle.dump(tree, open(args.output_folder + "classification_tree_model.sav", "wb"))
     predicted_train.to_csv(args.output_folder+"train_predictions.csv")
     predicted_test.to_csv(args.output_folder+"test_predictions.csv")
     print("Exports complete")
-    
+
     return tree
 
+# Description: split the data sets into a X-feature set and y-target sets
+# Parameter:   data(dataframe) = dataframe with target being in the last column named "Survived"
+# Return:      X(dataframe) = dataframe containing feature columns
+#              y(dataframe) = dataframe containing the target column
 def split_data(data):
     X = data.iloc[:, 0:-1]
     y = data.Survived
     return(X, y)
 
+
+# Description: Find the best max_depth hyperparameter by 10-fold cross valiation
+# Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
+#              ytrain(dataframe) = dataframe containing the training target column
+# Return:      best_depth(integer) = the max_depth that gave the best accuracies
 def calc_depth(Xtrain,ytrain):
     max_depths = range(1, 50)
 
@@ -68,11 +86,24 @@ def calc_depth(Xtrain,ytrain):
     best_depth = max_depths[np.argmax(accuracies)]
     return(best_depth)
 
+
+# Description: create decision classification tree
+# Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
+#              ytrain(dataframe) = dataframe containing the training target column
+#              best_depth(integer) = the max_depth that gave the best accuracies
+# Return:      tree(DecisionTreeClassifier object) = classification tree model
 def fit(Xtrain, ytrain, best_depth):
     tree = DecisionTreeClassifier(max_depth=best_depth)
     tree.fit(Xtrain,ytrain)
     return(tree)
 
+
+# Description: predict targets from feature set using the classification tree
+# Parameter:   tree(DecisionTreeClassifier object) = classification tree model
+#              feature_set(dataframe) = dataframe containing the feature columns
+#              whole_set(dataframe) = dataframe containing the feature and target columns
+# Return:      tree_predict(dataframe) = dataframe with an addition prediction column
+#                                        appended to the whole_set dataframe
 def predict(tree, feature_set, whole_set):
     predictions = tree.predict(feature_set)
     tree_predict = whole_set.copy()
