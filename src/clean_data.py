@@ -9,6 +9,8 @@
 
 # Usage: python clean_data.py <train.csv path> <test.csv path> <gender_submission.csv path>
 #        <clean_train.csv path> <clean_test.csv path> <clean_total.csv path>
+# Example: python clean_data.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv
+#          data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv    
 
 import argparse
 import pandas as pd
@@ -47,7 +49,7 @@ def main():
     titanic_test.to_csv(args.cleaned_test)
     print("Clean data exported")
 
-#calculate statistical center of "age" and "fare"
+# Calculate statistical center of "age" and "fare"
 def calcNAN(df):
     return {'Age': df.Age.mean(), 'Fare': df.Fare.median()}
 
