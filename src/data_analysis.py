@@ -55,8 +55,8 @@ def main():
 
     # Export predictions to csv
     pickle.dump(tree, open(args.output_folder + "model/decision_tree_model.sav", "wb"))
-    predicted_train.to_csv(args.output_folder+"train_predictions.csv")
-    predicted_test.to_csv(args.output_folder+"test_predictions.csv")
+    predicted_train.to_csv(args.output_folder+"train_prediction.csv")
+    predicted_test.to_csv(args.output_folder+"test_prediction.csv")
     print("Exports complete")
 
 def split_data(data):
