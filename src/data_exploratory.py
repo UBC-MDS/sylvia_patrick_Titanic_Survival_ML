@@ -23,13 +23,13 @@ parser.add_argument('output_folder')
 args = parser.parse_args()
 
 def main():
-    # import file
+    # Import file
     titanic_train = pd.read_csv(args.input_file, index_col = 0)
 
     survived = titanic_train.query("Survived == 1")
     died = titanic_train.query("Survived != 1")
 
-    # plot Histograms for continuous variables
+    # Plot Histograms for continuous variables
     cont_variables = {"Age" : "Age",
     "SibSp" : "Number of siblings/spouses onboard",
     "Parch": "Number of parents/children onboard",
@@ -50,6 +50,8 @@ def main():
     plt.xlabel("Sex")
     plt.ylabel("Count")
     plt.savefig(args.output_folder + "sex.png")
+    
+    print("Plots saved")
 
 def cont_plot(survived_df, died_df, cont_variables):
     for i in cont_variables:

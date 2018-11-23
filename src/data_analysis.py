@@ -55,27 +55,29 @@ def main():
 
     # Export predictions to csv
     pickle.dump(tree, open(args.output_folder + "model/decision_tree_model.sav", "wb"))
-    predicted_train.to_csv(args.output_folder+"train_predictions.csv")
-    predicted_test.to_csv(args.output_folder+"test_predictions.csv")
+    predicted_train.to_csv(args.output_folder+"train_prediction.csv")
+    predicted_test.to_csv(args.output_folder+"test_prediction.csv")
     print("Exports complete")
 
-
-
-# Description: split the data sets into a X-feature set and y-target sets
-# Parameter:   data(dataframe) = dataframe with target being in the last column named "Survived"
-# Return:      X(dataframe) = dataframe containing feature columns
-#              y(dataframe) = dataframe containing the target column
 def split_data(data):
+    """
+    Description: split the data sets into a X-feature set and y-target sets
+    Parameter:   data(dataframe) = dataframe with target being in the last column named "Survived"
+    Return:      X(dataframe) = dataframe containing feature columns
+                 y(dataframe) = dataframe containing the target column
+    """
     X = data.iloc[:, 0:-1]
     y = data.Survived
     return(X, y)
 
 
-# Description: Find the best max_depth hyperparameter by 10-fold cross valiation
-# Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
-#              ytrain(dataframe) = dataframe containing the training target column
-# Return:      best_depth(integer) = the max_depth that gave the best accuracies
 def calc_depth(Xtrain,ytrain):
+    """
+    Description: Find the best max_depth hyperparameter by 10-fold cross valiation
+    Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
+                 ytrain(dataframe) = dataframe containing the training target column
+    Return:      best_depth(integer) = the max_depth that gave the best accuracies
+    """
     max_depths = range(1, 50)
 
     accuracies = []
@@ -88,24 +90,27 @@ def calc_depth(Xtrain,ytrain):
     return(best_depth)
 
 
-# Description: create decision classification tree
-# Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
-#              ytrain(dataframe) = dataframe containing the training target column
-#              best_depth(integer) = the max_depth that gave the best accuracies
-# Return:      tree(DecisionTreeClassifier object) = classification tree model
 def fit(Xtrain, ytrain, best_depth):
+    """
+    Description: create decision classification tree
+    Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
+                 ytrain(dataframe) = dataframe containing the training target column
+                 best_depth(integer) = the max_depth that gave the best accuracies
+    Return:      tree(DecisionTreeClassifier object) = classification tree model
+    """
     tree = DecisionTreeClassifier(max_depth=best_depth)
     tree.fit(Xtrain,ytrain)
     return(tree)
 
-
-# Description: predict targets from feature set using the classification tree
-# Parameter:   tree(DecisionTreeClassifier object) = classification tree model
-#              feature_set(dataframe) = dataframe containing the feature columns
-#              whole_set(dataframe) = dataframe containing the feature and target columns
-# Return:      tree_predict(dataframe) = dataframe with an addition prediction column
-#                                        appended to the whole_set dataframe
 def predict(tree, feature_set, whole_set):
+    """
+    Description: predict targets from feature set using the classification tree
+    Parameter:   tree(DecisionTreeClassifier object) = classification tree model
+                 feature_set(dataframe) = dataframe containing the feature columns
+                 whole_set(dataframe) = dataframe containing the feature and target columns
+    Return:      tree_predict(dataframe) = dataframe with an addition prediction column
+                 appended to the whole_set dataframe
+    """
     predictions = tree.predict(feature_set)
     tree_predict = whole_set.copy()
     tree_predict["Prediction"] = predictions

@@ -21,7 +21,7 @@ import pickle
 # Parse input arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("tree_model")
-parser.add_argement("predicted_train_data")
+parser.add_argument("predicted_train_data")
 parser.add_argument("predicted_test_data")
 parser.add_argument("output_folder")
 args = parser.parse_args()
@@ -47,7 +47,7 @@ def main():
     feature_rank_df = feature_rank(tree, features)
 
     # Export feature ranks to csv
-    feature_rank_df.to_csv(args.output_folder + feature_ranks.csv)
+    feature_rank_df.to_csv(args.output_folder + "feature_ranks.csv")
     print("Export Feature Ranks")
 
     # Export Decision Tree

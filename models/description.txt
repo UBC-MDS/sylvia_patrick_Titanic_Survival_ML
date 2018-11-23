@@ -1,1 +1,0 @@
-This is a directory for storing ML models and everything related to running these models
