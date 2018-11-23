@@ -41,11 +41,11 @@ def main():
     # Create decision tree and fit model
     tree = fit(Xtrain, ytrain, best_depth)
 
-    # Predict using train and test set
+    # Predicting with train and test set
     train_prediction = predict(tree, Xtrain, titanic_train)
     test_prediction = predict(tree, Xtest, titanic_test)
 
-    # Get accuracy scores
+    # Get accuracies of train and test set
     accuracies_df = pd.DataFrame(columns = ["set", "n_total", "n_correct_pred", "n_incorrect_pred", "accuracy"])
     accuracies_df.loc[0] = get_accuracies(train_prediction, "train")
     accuracies_df.loc[1] = get_accuracies(test_prediction, "test")
@@ -61,11 +61,22 @@ def main():
     accuracies_df.to_csv(args.output_folder + "classification_accuracies.csv")
     feature_rank_df.to_csv(args.output_folder + "feature_ranks.csv")
 
+
+
+# Description: split the data sets into a X-feature set and y-target sets
+# Parameter:   data(dataframe) = dataframe with target being in the last column named "Survived"
+# Return:      X(dataframe) = dataframe containing feature columns
+#              y(dataframe) = dataframe containing the target column
 def split_data(data):
     X = data.iloc[:, 0:-1]
     y = data.Survived
     return(X, y)
 
+
+# Description: Find the best max_depth hyperparameter by 10-fold cross valiation
+# Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
+#              ytrain(dataframe) = dataframe containing the training target column
+# Return:      best_depth(integer) = the max_depth that gave the best accuracies
 def cross_validate(Xtrain,ytrain):
     max_depths = range(1, 50)
 
@@ -78,17 +89,38 @@ def cross_validate(Xtrain,ytrain):
     best_depth = max_depths[np.argmax(accuracies)]
     return(best_depth)
 
+
+# Description: create decision classification tree
+# Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
+#              ytrain(dataframe) = dataframe containing the training target column
+#              best_depth(integer) = the max_depth that gave the best accuracies
+# Return:      tree(DecisionTreeClassifier object) = classification tree model
 def fit(Xtrain, ytrain, best_depth):
     tree = DecisionTreeClassifier(max_depth=best_depth)
     tree.fit(Xtrain,ytrain)
     return(tree)
 
+
+# Description: predict targets from feature set using the classification tree
+# Parameter:   tree(DecisionTreeClassifier object) = classification tree model
+#              feature_set(dataframe) = dataframe containing the feature columns
+#              whole_set(dataframe) = dataframe containing the feature and target columns
+# Return:      tree_predict(dataframe) = dataframe with an addition prediction column
+#                                        appended to the whole_set dataframe
 def predict(tree, feature_set, whole_set):
     predictions = tree.predict(feature_set)
     tree_predict = whole_set.copy()
     tree_predict["Prediction"] = predictions
     return(tree_predict)
 
+
+# Description: evaluate accuracies of the predictions be comparing the targets and the predictions
+# Parameter:   df(dataframe) = dataframe with an addition prediction column
+#                                        appended to the whole_set dataframe
+#              set_name(string) = name of the set being evaluated ("train" or "test")
+# Return:      (list) = list containing the set name(str),
+#                       total number of predicted samples(int), number of correct predictions(int),
+#                       number of incorrect predictions(int), prediction accuracy(float)
 def get_accuracies(df, set_name):
     correct_predictions = df.Survived[df.Survived == df.Prediction].sum()
     incorrect_predictions = df.Survived[df.Survived != df.Prediction].sum()
@@ -96,7 +128,13 @@ def get_accuracies(df, set_name):
     accuracy = round(correct_predictions / total, 4)
     return([set_name, total, correct_predictions, incorrect_predictions, accuracy])
 
-# Feature ranking
+
+
+# Description: rank the features from the most predictive to the least predictive
+# Parameter:   tree(DecisionTreeClassifier object) = classification tree model
+#              features(list) = list of feature names(str)
+# Return:      feature_rank_df(dataframe) = dataframe that contains the rank, feature
+#              name and importance measure in ascending order. Rank of 1 is most predictive
 def feature_rank(tree, features):
     importances = tree.feature_importances_
     importance_indices = importances.argsort()[::-1]
@@ -105,7 +143,6 @@ def feature_rank(tree, features):
 
     for i in range(len(features)):
         feature_rank_df.loc[i] = [i+1, features[importance_indices[i]], importances[importance_indices[i]]]
-        #print("Rank {}. {} ({})".format(i+1, tree_predict.columns[importance_indices[i]], importances[importance_indices[i]]))
 
     return(feature_rank_df)
 
