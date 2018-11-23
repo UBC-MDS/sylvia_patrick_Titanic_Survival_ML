@@ -9,19 +9,27 @@
 #              the value for hyperparameters. It then returns the top three
 #              most important features.
 
-# Usage: python data_analysis.py <train.csv path> <test.csv path> <gender_submission.csv path>
-#        <clean_train.csv path> <clean_test.csv path> <clean_total.csv path>
+# Usage: python data_analysis.py <cleaned_train.csv path> <cleaned_test.csv path> <output_folder path/>
+# Example: python data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
 
+import argparse
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import cross_val_score
+import pickle
+
+parser = argparse.ArgumentParser()
+parser.add_argument("training_data")
+parser.add_argument("testing_data")
+parser.add_argument("output_folder")
+args = parser.parse_args()
 
 def main():
     # Read data
-    titanic_train = pd.read_csv("../data/cleaned/cleaned_train.csv", index_col = 0)
-    titanic_test = pd.read_csv("../data/cleaned/cleaned_test.csv", index_col = 0)
+    titanic_train = pd.read_csv(args.training_data, index_col = 0)
+    titanic_test = pd.read_csv(args.testing_data, index_col = 0)
 
     # Split data into feature and target dataframes
     Xtrain, ytrain = split_data(titanic_train)
@@ -29,27 +37,29 @@ def main():
 
     # Cross Validation to find the best max_depth for decision classification tree
     best_depth = cross_validate(Xtrain, ytrain)
-    print(best_depth)
 
     # Create decision tree and fit model
     tree = fit(Xtrain, ytrain, best_depth)
 
     # Predict using train and test set
-    predicted_train = predict(tree, Xtrain, titanic_train)
-    predicted_test = predict(tree, Xtest, titanic_test)
+    train_prediction = predict(tree, Xtrain, titanic_train)
+    test_prediction = predict(tree, Xtest, titanic_test)
 
     # Get accuracy scores
     accuracies_df = pd.DataFrame(columns = ["set", "n_total", "n_correct_pred", "n_incorrect_pred", "accuracy"])
-    accuracies_df.loc[0] = get_accuracies(predicted_train, "train")
-    accuracies_df.loc[1] = get_accuracies(predicted_test, "test")
+    accuracies_df.loc[0] = get_accuracies(train_prediction, "train")
+    accuracies_df.loc[1] = get_accuracies(test_prediction, "test")
 
     # Rank the most predictive features
     features = list(Xtrain)
     feature_rank_df = feature_rank(tree, features)
-    print(feature_rank_df)
-    # Export predictions to csv?
-    # tree_predict.to_csv("predictions.csv")
 
+    # Export files
+    pickle.dump(tree, open(args.output_folder + "classification_tree_model.sav", "wb"))
+    train_prediction.to_csv(args.output_folder + "train_prediction.csv")
+    test_prediction.to_csv(args.output_folder + "test_prediction.csv")
+    accuracies_df.to_csv(args.output_folder + "classification_accuracies.csv")
+    feature_rank_df.to_csv(args.output_folder + "feature_ranks.csv")
 
 def split_data(data):
     X = data.iloc[:, 0:-1]
@@ -98,4 +108,6 @@ def feature_rank(tree, features):
         #print("Rank {}. {} ({})".format(i+1, tree_predict.columns[importance_indices[i]], importances[importance_indices[i]]))
 
     return(feature_rank_df)
-main()
+
+if __name__ == "__main__":
+    main()
