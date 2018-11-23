@@ -1,4 +1,16 @@
 #!/usr/bin/env python
+
+# data_exploratory.py
+# Patrick Tung, Sylvia Lee (Nov 22, 2018)
+
+# Description: This script takes in the clean titanic training sets
+#              and generate exploratory figures. Barplots are generated for
+#              categorical variables, and histograms are generated for numeric
+#              variables.
+
+# Usage:   python data_exploratory.py <train.csv path> <output_folder path>
+# Example: python data_exploratory.py data/cleaned/cleaned_train.csv results/figure/
+
 import argparse
 import pandas as pd
 import seaborn as sns
@@ -22,7 +34,6 @@ def main():
     "SibSp" : "Number of siblings/spouses onborad",
     "Parch": "Number of parents/children onbard",
     "Fare": "Fare prices"}
-
     cont_plot(survived, died, cont_variables)
 
     # Create plot for Pclass
