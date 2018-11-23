@@ -16,7 +16,7 @@ import argparse
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.model_selection import cross_val_score
 import pickle
 
@@ -26,42 +26,39 @@ parser.add_argument("testing_data")
 parser.add_argument("output_folder")
 args = parser.parse_args()
 
+parser = argparse.ArgumentParser()
+parser.add_argument('training_data')
+parser.add_argument('testing_data')
+parser.add_argument('output_folder')
+args = parser.parse_args()
+
 def main():
     # Read data
     titanic_train = pd.read_csv(args.training_data, index_col = 0)
     titanic_test = pd.read_csv(args.testing_data, index_col = 0)
+    print("Data Import Success")
 
     # Split data into feature and target dataframes
     Xtrain, ytrain = split_data(titanic_train)
     Xtest, ytest = split_data(titanic_test)
 
     # Cross Validation to find the best max_depth for decision classification tree
-    best_depth = cross_validate(Xtrain, ytrain)
+    best_depth = calc_depth(Xtrain, ytrain)
 
     # Create decision tree and fit model
     tree = fit(Xtrain, ytrain, best_depth)
 
-    # Predicting with train and test set
-    train_prediction = predict(tree, Xtrain, titanic_train)
-    test_prediction = predict(tree, Xtest, titanic_test)
+    # Predict using train and test set
+    predicted_train = predict(tree, Xtrain, titanic_train)
+    predicted_test = predict(tree, Xtest, titanic_test)
 
-    # Get accuracies of train and test set
-    accuracies_df = pd.DataFrame(columns = ["set", "n_total", "n_correct_pred", "n_incorrect_pred", "accuracy"])
-    accuracies_df.loc[0] = get_accuracies(train_prediction, "train")
-    accuracies_df.loc[1] = get_accuracies(test_prediction, "test")
-
-    # Rank the most predictive features
-    features = list(Xtrain)
-    feature_rank_df = feature_rank(tree, features)
-
-    # Export files
+    # Export predictions to csv
     pickle.dump(tree, open(args.output_folder + "classification_tree_model.sav", "wb"))
-    train_prediction.to_csv(args.output_folder + "train_prediction.csv")
-    test_prediction.to_csv(args.output_folder + "test_prediction.csv")
-    accuracies_df.to_csv(args.output_folder + "classification_accuracies.csv")
-    feature_rank_df.to_csv(args.output_folder + "feature_ranks.csv")
+    predicted_train.to_csv(args.output_folder+"train_predictions.csv")
+    predicted_test.to_csv(args.output_folder+"test_predictions.csv")
+    print("Exports complete")
 
-
+    return tree
 
 # Description: split the data sets into a X-feature set and y-target sets
 # Parameter:   data(dataframe) = dataframe with target being in the last column named "Survived"
@@ -77,7 +74,7 @@ def split_data(data):
 # Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
 #              ytrain(dataframe) = dataframe containing the training target column
 # Return:      best_depth(integer) = the max_depth that gave the best accuracies
-def cross_validate(Xtrain,ytrain):
+def calc_depth(Xtrain,ytrain):
     max_depths = range(1, 50)
 
     accuracies = []
@@ -113,38 +110,6 @@ def predict(tree, feature_set, whole_set):
     tree_predict["Prediction"] = predictions
     return(tree_predict)
 
-
-# Description: evaluate accuracies of the predictions be comparing the targets and the predictions
-# Parameter:   df(dataframe) = dataframe with an addition prediction column
-#                                        appended to the whole_set dataframe
-#              set_name(string) = name of the set being evaluated ("train" or "test")
-# Return:      (list) = list containing the set name(str),
-#                       total number of predicted samples(int), number of correct predictions(int),
-#                       number of incorrect predictions(int), prediction accuracy(float)
-def get_accuracies(df, set_name):
-    correct_predictions = df.Survived[df.Survived == df.Prediction].sum()
-    incorrect_predictions = df.Survived[df.Survived != df.Prediction].sum()
-    total = correct_predictions + incorrect_predictions
-    accuracy = round(correct_predictions / total, 4)
-    return([set_name, total, correct_predictions, incorrect_predictions, accuracy])
-
-
-
-# Description: rank the features from the most predictive to the least predictive
-# Parameter:   tree(DecisionTreeClassifier object) = classification tree model
-#              features(list) = list of feature names(str)
-# Return:      feature_rank_df(dataframe) = dataframe that contains the rank, feature
-#              name and importance measure in ascending order. Rank of 1 is most predictive
-def feature_rank(tree, features):
-    importances = tree.feature_importances_
-    importance_indices = importances.argsort()[::-1]
-
-    feature_rank_df = pd.DataFrame(columns = ['Rank', 'Feature', 'Importance'])
-
-    for i in range(len(features)):
-        feature_rank_df.loc[i] = [i+1, features[importance_indices[i]], importances[importance_indices[i]]]
-
-    return(feature_rank_df)
 
 if __name__ == "__main__":
     main()

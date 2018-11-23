@@ -31,8 +31,8 @@ def main():
 
     # plot Histograms for continuous variables
     cont_variables = {"Age" : "Age",
-    "SibSp" : "Number of siblings/spouses onborad",
-    "Parch": "Number of parents/children onbard",
+    "SibSp" : "Number of siblings/spouses onboard",
+    "Parch": "Number of parents/children onboard",
     "Fare": "Fare prices"}
     cont_plot(survived, died, cont_variables)
 
