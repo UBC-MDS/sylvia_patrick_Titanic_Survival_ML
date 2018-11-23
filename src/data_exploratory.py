@@ -55,7 +55,9 @@ def cont_plot(survived_df, died_df, cont_variables):
     for i in cont_variables:
         fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
         ax1.hist(survived_df[i])
+        ax1.set_title("Survived")
         ax2.hist(died_df[i])
+        ax2.set_title("Did not survive")
 
         # Axis labels
         ax1.set_ylabel("Frequency")
