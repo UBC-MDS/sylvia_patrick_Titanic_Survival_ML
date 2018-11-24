@@ -20,25 +20,25 @@ python src/data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_
 
 ### Dependencies
 + Python libraries:
-  + argparse
-  + pandas
-  + numpy
-  + sklearn
-  + matplotlib
-  + seaborn
-  + pickle
-  + graphviz
+    + argparse v1.1
+    + pandas v0.23.4
+    + numpy v1.15.3
+    + sklearn v0.20.0
+    + matplotlib v3.0.1
+    + seaborn v0.9.0
+    + pickle v4.0
+    + graphviz v0.8.4
 
 ### Table of Contents
 1) Introduction
 2) Visualizations
 3) Prediction
-  + Predictions
-  + Feature Importance Ranking
+    + Predictions
+    + Feature Importance Ranking
 4) Limitations
 
 ### Introduction
-*Who will survive through the Titanic crash?*
+**Who will survive through the Titanic crash?**
 
 We will do an analysis on the data set from [Kaggle's Titanic:Machine Learning from Disaster](https://www.kaggle.com/c/titanic). It includes information about the passengers on the Titanic and if they survived the disaster or not. All data was downloaded from the site as csv files and uploaded into the [data/raw/](https://github.com/UBC-MDS/sylvia_patrick_Titanic_Survival_ML/tree/master/data/raw) directory. 
 
@@ -79,7 +79,8 @@ Number of Siblings/Spouses Onboard Plot:
 
 ### Predictions and Evaluations
 
-*Predictions*
+**Predictions**
+
 Below, is a snippet of our predictions for both the training data set and the testing data set:
 ```{r echo=FALSE}
 train_prediction <- read.csv("results/train_prediction.csv")
@@ -88,20 +89,35 @@ print(head(train_prediction, 10))
 print(head(test_prediction, 10))
 ```
 
-*Model Performance*
+**Model Performance**
+
 To evaluate the accuracy of the model, we used our testing data, which was not part of the training model. We then used this accuracy score to compare with the accuracy score we achieved from the training model. What we are trying to see here is whether or not there is an increase in the accuracy of our testing model to training model. We do not want our model to be overfit and therefore, cause poor generalization issues. 
 
-The accuracies we obtained were as:
+The accuracies we obtained are presented in the following table:
 ```{r echo=FALSE}
 accuracies <- read.csv("results/accuracies.csv")
 print(accuracies)
 ```
-0.7778 for the training data set, and 0.8421 for the testing data set. It would seem that our model is quite generalized for our prediction and therefore, we obtained a much higher accuracy score on the testing than on the training data set. 
+As you can see, our model predicted the training data set with an accuracy of 0.7778, predicted the testing data set with an accuracy of 0.8421. It would seem that our model is quite generalized for our prediction and therefore, we obtained a much higher accuracy score on the testing than on the training data set. 
 
-*Feature Importance Ranking*
+**Feature Importance Ranking**
+
 The ultimate goal of our research is to determine which variables in the data set are among the most important. To do this, we took our tree and generated an importance score. The importance score evaluated by sklearn is the "gini importance", also known as "mean decrease impurity". Essentially, the higher the value here, the more important the feature is. You can see how our features are ranked below.
 ```{r echo=FALSE}
 rank <- read.csv("results/feature_ranks.csv")
 print(rank)
 ```
 From our results, we can determine that the top three most important features in our model is: 1) Sex, 2) Passenger Class, 3) Fare Prices.
+
+
+### Limitations
+
+First of all, the biggest limitation to our project is that we only chose one type of model, which is decision tree. I believe that we could have used tested out different models for making our predictions, however, because we have not really learned a lot of models, we were wary of fitting something that we were unfamiliar with. Therefore, to compensate for having choosing only one model, we decided to use cross validation to pick the best hyperparameter for our decision tree. We performed cross validation on our tree so that we could choose the best `max_depth`.
+
+Since we are on the topic of cross validation, another limitation that we encountered during this project was that we used means and medians for the imputation of missing values. We could have decided to use regressors to make predictions on the best value to be inserted into the missing values. However, this was somewhat beyond our current understanding, so we decided that using the means and medians were sufficient for our project. 
+
+Lastly, for our prediction, we decided to subset the data set to only the relevant features that we were looking for in our research question. The entire data set that we were given had more features 
+
+
+
+
