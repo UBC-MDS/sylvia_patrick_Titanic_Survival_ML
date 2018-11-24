@@ -154,9 +154,7 @@ Below, is a snippet of our predictions for both the training data set and the te
 |          900|       3|    0|  18.0|      0|      0|   7.2292|         1|           1|
 |          901|       3|    1|  21.0|      2|      0|  24.1500|         0|           0|
 
-> <center>
 > Table 1 and 2. Snippet of Predictions for both the Training and Testing sets.
-> </center>
 
 **Model Performance**
 
@@ -169,9 +167,7 @@ The accuracies we obtained are presented in the following table:
 |    0| train |       342|               266|                  76|    0.7778|
 |    1| test  |       152|               128|                  24|    0.8421|
 
-> <center>
 > Table 3. Accuracy scores for training and testing sets.
-> </center>
 
 As you can see, our model predicted the training data set with an accuracy of 0.7778, predicted the testing data set with an accuracy of 0.8421. It would seem that our model is quite generalized for our prediction and therefore, we obtained a much higher accuracy score on the testing than on the training data set.
 
@@ -188,16 +184,14 @@ The ultimate goal of our research is to determine which variables in the data se
 |    4|     5| SibSp   |   0.0496373|
 |    5|     6| Parch   |   0.0149370|
 
-> <center>
 > Table 4. Ranks of each feature based on Gini Importance
-> </center>
 
-From our results, we can determine that the top three most important features in our model is: 1) Sex, 2) Passenger Class, 3) Fare Prices.
+From our results, we can determine that the top three most important features in our model is: 1) Sex, 2) Passenger Class, 3) Fare Prices. The gini importances were 0.4788, 0.1703, and 0.1555 respectively.
 
 ### Limitations
 
 First of all, the biggest limitation to our project is that we only chose one type of model, which is decision tree. I believe that we could have used tested out different models for making our predictions, however, because we have not really learned a lot of models, we were wary of fitting something that we were unfamiliar with. Therefore, to compensate for having choosing only one model, we decided to use cross validation to pick the best hyperparameter for our decision tree. We performed cross validation on our tree so that we could choose the best `max_depth`.
 
-Since we are on the topic of cross validation, another limitation that we encountered during this project was that we used means and medians for the imputation of missing values. We could have decided to use regressors to make predictions on the best value to be inserted into the missing values. However, this was somewhat beyond our current understanding, so we decided that using the means and medians were sufficient for our project.
+Another limitation that we encountered during this project was that we used means and medians for the imputation of missing values. We could have decided to use regressors to make predictions on the best value to be inserted into the missing values. However, this was somewhat beyond our current understanding, so we decided that using the means and medians were sufficient imputation methods for our predictions.
 
 Lastly, for our prediction, we decided to subset the data set to only the relevant features that we were looking for in our research question. The entire data set that we originally started with had many more features such as where the passenger embarked, however, to simplify the question a little bit, we decided to use only a subset of the features to predict survival rates. Despite using less features, we believe that we still performed quite well with our predictions.

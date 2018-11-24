@@ -161,16 +161,14 @@ knitr::include_graphics(here::here("results/figure/SibSp_plot.png"))
 **Predictions**
 
 Below, is a snippet of our predictions for both the training data set and the testing data set:
-```{r predictions, fig.align = "center", echo=FALSE}
+```{r predictions, echo=FALSE}
 train_prediction <- read.csv(here::here("results/train_prediction.csv"))
 test_prediction <- read.csv(here::here("results/test_prediction.csv"))
 knitr::kable(head(train_prediction, 10))
 knitr::kable(head(test_prediction, 10))
 ```
 
-> <center>
 > Table 1 and 2. Snippet of Predictions for both the Training and Testing sets.
-> </center>
 
 **Model Performance**
 
@@ -178,14 +176,12 @@ To evaluate the accuracy of the model, we used our testing data, which was not p
 
 The accuracies we obtained are presented in the following table:
 
-```{r accuracies, fig.align = "center", echo=FALSE}
+```{r accuracies, echo=FALSE}
 accuracies <- read.csv(here::here("results/accuracies.csv"))
 knitr::kable(accuracies)
 ```
 
-> <center>
 > Table 3. Accuracy scores for training and testing sets.
-> </center>
 
 As you can see, our model predicted the training data set with an accuracy of 0.7778, predicted the testing data set with an accuracy of 0.8421. It would seem that our model is quite generalized for our prediction and therefore, we obtained a much higher accuracy score on the testing than on the training data set.
 
@@ -193,22 +189,20 @@ As you can see, our model predicted the training data set with an accuracy of 0.
 
 The ultimate goal of our research is to determine which variables in the data set are among the most important. To do this, we took our tree and generated an importance score. The importance score evaluated by sklearn is the "gini importance", also known as "mean decrease impurity". Essentially, the higher the value here, the more important the feature is. You can see how our features are ranked below.
 
-```{r feature_ranks, fig.align = "center", echo=FALSE}
+```{r feature_ranks, echo=FALSE}
 rank <- read.csv(here::here("results/feature_ranks.csv"))
 knitr::kable(rank)
 ```
 
-> <center>
 > Table 4. Ranks of each feature based on Gini Importance
-> </center>
 
-From our results, we can determine that the top three most important features in our model is: 1) Sex, 2) Passenger Class, 3) Fare Prices.
+From our results, we can determine that the top three most important features in our model is: 1) Sex, 2) Passenger Class, 3) Fare Prices. The gini importances were 0.4788, 0.1703, and 0.1555 respectively.
 
 
 ### Limitations
 
 First of all, the biggest limitation to our project is that we only chose one type of model, which is decision tree. I believe that we could have used tested out different models for making our predictions, however, because we have not really learned a lot of models, we were wary of fitting something that we were unfamiliar with. Therefore, to compensate for having choosing only one model, we decided to use cross validation to pick the best hyperparameter for our decision tree. We performed cross validation on our tree so that we could choose the best `max_depth`.
 
-Since we are on the topic of cross validation, another limitation that we encountered during this project was that we used means and medians for the imputation of missing values. We could have decided to use regressors to make predictions on the best value to be inserted into the missing values. However, this was somewhat beyond our current understanding, so we decided that using the means and medians were sufficient for our project.
+Another limitation that we encountered during this project was that we used means and medians for the imputation of missing values. We could have decided to use regressors to make predictions on the best value to be inserted into the missing values. However, this was somewhat beyond our current understanding, so we decided that using the means and medians were sufficient imputation methods for our predictions.
 
 Lastly, for our prediction, we decided to subset the data set to only the relevant features that we were looking for in our research question. The entire data set that we originally started with had many more features such as where the passenger embarked, however, to simplify the question a little bit, we decided to use only a subset of the features to predict survival rates. Despite using less features, we believe that we still performed quite well with our predictions. 
