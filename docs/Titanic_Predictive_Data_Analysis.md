@@ -10,6 +10,7 @@ Sylvia Lee(sylvia19) and Patrick Tung(ptung)
 3.  Dependencies
 4.  Exploratory Visualizations
 5.  Prediction
+    -   Decision Tree Graphic
     -   Predictions
     -   Feature Importance Ranking
 6.  Limitations
@@ -123,6 +124,12 @@ There seemed to be a pattern in the survival proportion of the passenger classes
 > </center>
 
 ### Predictions and Evaluations
+
+**Decision Tree Graphic**
+
+![](results/decision_tree.png)
+
+<img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/decision_tree.png" width="5839" style="display: block; margin: auto;" />
 
 **Predictions**
 

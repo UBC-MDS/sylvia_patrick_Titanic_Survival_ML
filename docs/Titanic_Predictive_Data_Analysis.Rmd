@@ -18,6 +18,7 @@ library(imager)
 3) Dependencies
 4) Exploratory Visualizations
 5) Prediction
+    + Decision Tree Graphic
     + Predictions
     + Feature Importance Ranking
 6) Limitations
@@ -157,6 +158,17 @@ knitr::include_graphics(here::here("results/figure/SibSp_plot.png"))
 
 
 ### Predictions and Evaluations
+
+**Decision Tree Graphic**
+
+![](results/decision_tree.png)
+
+
+
+```{r tree, fig.align = "center"}
+
+knitr::include_graphics(here::here("results/decision_tree.png"))
+```
 
 **Predictions**
 
