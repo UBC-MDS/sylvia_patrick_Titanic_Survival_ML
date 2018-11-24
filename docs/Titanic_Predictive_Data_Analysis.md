@@ -154,7 +154,9 @@ Below, is a snippet of our predictions for both the training data set and the te
 |          900|       3|    0|  18.0|      0|      0|   7.2292|         1|           1|
 |          901|       3|    1|  21.0|      2|      0|  24.1500|         0|           0|
 
+> <center>
 > Table 1 and 2. Snippet of Predictions for both the Training and Testing sets.
+> </center>
 
 **Model Performance**
 
@@ -167,7 +169,9 @@ The accuracies we obtained are presented in the following table:
 |    0| train |       342|               266|                  76|    0.7778|
 |    1| test  |       152|               128|                  24|    0.8421|
 
+> <center>
 > Table 3. Accuracy scores for training and testing sets.
+> </center>
 
 As you can see, our model predicted the training data set with an accuracy of 0.7778, predicted the testing data set with an accuracy of 0.8421. It would seem that our model is quite generalized for our prediction and therefore, we obtained a much higher accuracy score on the testing than on the training data set.
 
@@ -184,7 +188,9 @@ The ultimate goal of our research is to determine which variables in the data se
 |    4|     5| SibSp   |   0.0496373|
 |    5|     6| Parch   |   0.0149370|
 
+> <center>
 > Table 4. Ranks of each feature based on Gini Importance
+> </center>
 
 From our results, we can determine that the top three most important features in our model is: 1) Sex, 2) Passenger Class, 3) Fare Prices.
 

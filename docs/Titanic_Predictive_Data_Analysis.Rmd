@@ -161,14 +161,16 @@ knitr::include_graphics(here::here("results/figure/SibSp_plot.png"))
 **Predictions**
 
 Below, is a snippet of our predictions for both the training data set and the testing data set:
-```{r echo=FALSE}
+```{r predictions, fig.align = "center", echo=FALSE}
 train_prediction <- read.csv(here::here("results/train_prediction.csv"))
 test_prediction <- read.csv(here::here("results/test_prediction.csv"))
 knitr::kable(head(train_prediction, 10))
 knitr::kable(head(test_prediction, 10))
 ```
 
+> <center>
 > Table 1 and 2. Snippet of Predictions for both the Training and Testing sets.
+> </center>
 
 **Model Performance**
 
@@ -176,12 +178,14 @@ To evaluate the accuracy of the model, we used our testing data, which was not p
 
 The accuracies we obtained are presented in the following table:
 
-```{r echo=FALSE}
+```{r accuracies, fig.align = "center", echo=FALSE}
 accuracies <- read.csv(here::here("results/accuracies.csv"))
 knitr::kable(accuracies)
 ```
 
+> <center>
 > Table 3. Accuracy scores for training and testing sets.
+> </center>
 
 As you can see, our model predicted the training data set with an accuracy of 0.7778, predicted the testing data set with an accuracy of 0.8421. It would seem that our model is quite generalized for our prediction and therefore, we obtained a much higher accuracy score on the testing than on the training data set.
 
@@ -189,13 +193,14 @@ As you can see, our model predicted the training data set with an accuracy of 0.
 
 The ultimate goal of our research is to determine which variables in the data set are among the most important. To do this, we took our tree and generated an importance score. The importance score evaluated by sklearn is the "gini importance", also known as "mean decrease impurity". Essentially, the higher the value here, the more important the feature is. You can see how our features are ranked below.
 
-```{r echo=FALSE}
+```{r feature_ranks, fig.align = "center", echo=FALSE}
 rank <- read.csv(here::here("results/feature_ranks.csv"))
 knitr::kable(rank)
 ```
 
+> <center>
 > Table 4. Ranks of each feature based on Gini Importance
-
+> </center>
 
 From our results, we can determine that the top three most important features in our model is: 1) Sex, 2) Passenger Class, 3) Fare Prices.
 
