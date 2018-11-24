@@ -30,28 +30,33 @@ In our project, we explored the dataset by generating graphs of the features' di
 
 ### Usage
 
-Multiple Python scripts were written in the analysis procedure. The following outlined the csteps taken to run this project.
+Multiple Python scripts were written in the analysis procedure. The following outlined the steps taken to run this project.
 
 1. Clone this repository.
 
 2. Run the following code in the terminal at the project's root repository.
+
 ```
 python src/clean_data.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv    
-python src/data_exploratory.py data/cleaned/cleaned_train.csv results/images/
+python src/data_exploratory.py data/cleaned/cleaned_train.csv results/figure/
 python src/data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
+python src/summarize_data.py results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv results/
+Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 ```
 
 ### Dependencies
+
 + Python libraries:
-  + argparse
-  + pandas
-  + numpy
-  + sklearn
-  + matplotlib
-  + seaborn
-  + pickle
-  + graphviz
+    + argparse v1.1
+    + pandas v0.23.4
+    + numpy v1.15.3
+    + sklearn v0.20.0
+    + matplotlib v3.0.1
+    + seaborn v0.9.0
+    + pickle v4.0
+    + graphviz v0.8.4
 
 
 + R packages:
-  + here
+    + here v0.1
+    + imager v0.41.1
