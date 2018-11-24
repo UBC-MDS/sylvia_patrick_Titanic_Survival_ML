@@ -161,7 +161,7 @@ knitr::include_graphics(here::here("results/figure/SibSp_plot.png"))
 
 **Decision Tree Graphic**
 
-![](results/decision_tree.png)
+![](../results/decision_tree.png)
 
 
 

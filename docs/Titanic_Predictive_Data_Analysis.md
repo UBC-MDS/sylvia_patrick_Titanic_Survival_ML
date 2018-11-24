@@ -127,7 +127,7 @@ There seemed to be a pattern in the survival proportion of the passenger classes
 
 **Decision Tree Graphic**
 
-![](results/decision_tree.png)
+![](../results/decision_tree.png)
 
 <img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/decision_tree.png" width="5839" style="display: block; margin: auto;" />
 
