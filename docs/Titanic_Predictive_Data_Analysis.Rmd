@@ -2,7 +2,7 @@
 title: "Machine Learning - Predicting Survival on the Titanic"
 author: Sylvia Lee(sylvia19) and Patrick Tung(ptung)
 output: github_document
-date: 15 Nov, 2018
+date: 24 Nov, 2018
 ---
 
 ```{r setup, include=FALSE}
@@ -18,8 +18,8 @@ library(imager)
 3) Dependencies
 4) Exploratory Visualizations
 5) Prediction
-   + Predictions
-   + Feature Importance Ranking
+    + Predictions
+    + Feature Importance Ranking
 6) Limitations
 
 ### Introduction
@@ -83,7 +83,6 @@ In general we found that the data reflected the "women and children first" evacu
 **Age**
 
 ```{r age_fig ,fig.align = "center"}
-
 knitr::include_graphics(here::here("results/figure/Age_plot.png"))
 ```
 
@@ -95,6 +94,7 @@ The shape of the distributions were very similar. Both ranges from 0 to ~70 year
 
 
 **Sex**
+
 ```{r sex_fig, fig.align = "center"}
 
 knitr::include_graphics(here::here("results/figure/sex.png"))

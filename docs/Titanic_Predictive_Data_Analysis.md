@@ -1,7 +1,7 @@
 Machine Learning - Predicting Survival on the Titanic
 ================
 Sylvia Lee(sylvia19) and Patrick Tung(ptung)
-15 Nov, 2018
+24 Nov, 2018
 
 ### Table of Contents
 
@@ -10,11 +10,9 @@ Sylvia Lee(sylvia19) and Patrick Tung(ptung)
 3.  Dependencies
 4.  Exploratory Visualizations
 5.  Prediction
-
--   Predictions
--   Feature Importance Ranking
-
-1.  Limitations
+    -   Predictions
+    -   Feature Importance Ranking
+6.  Limitations
 
 ### Introduction
 
@@ -80,7 +78,9 @@ In general we found that the data reflected the "women and children first" evacu
 
 The shape of the distributions were very similar. Both ranges from 0 to ~70 years old and had a single peak at approximately 20 to 30 years old. However, as expected from the "women and children first" evacuation policy, the "survived" distribution had higher frequencies in the age range of 0 to 10 than the "did not survive" group.
 
-**Sex** <img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/sex.png" width="640" style="display: block; margin: auto;" />
+**Sex**
+
+<img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/sex.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Fig 2. Bar plot of sex distribution among the passengers that survived versus those did not survive.
