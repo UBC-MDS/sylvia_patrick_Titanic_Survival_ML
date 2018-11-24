@@ -1,7 +1,7 @@
 Machine Learning - Predicting Survival on the Titanic
 ================
 Sylvia Lee(sylvia19) and Patrick Tung(ptung)
-24 Nov, 2018
+23 Nov, 2018
 
 ### Table of Contents
 
