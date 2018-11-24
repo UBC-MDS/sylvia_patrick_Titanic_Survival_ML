@@ -129,10 +129,7 @@ There seemed to be a pattern in the survival proportion of the passenger classes
 
 The following is a visual representation of our decision tree. As you can see, the first split was by Sex ≤ 0.5, meaning that it thought the most important split was with the Sex feature. Unfortunately, the graphic representation is too large to easily read on this screen, but a higher quality image can be found in the `results` folder.
 
-![](../results/decision_tree.png)
-=================================
-
-<img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/decision_tree.png" width="5839" style="display: block; margin: auto;" />
+![](../results/decision_tree.png) <img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/decision_tree.png" width="5839" style="display: block; margin: auto;" />
 
 > <center>
 > Fig 7. The graphical representation of our prediction tree model.
