@@ -161,14 +161,17 @@ knitr::include_graphics(here::here("results/figure/SibSp_plot.png"))
 
 **Decision Tree Graphic**
 
-![](../results/decision_tree.png)
+The following is a visual representation of our decision tree. As you can see, the first split was by Sex ≤ 0.5, meaning that it thought the most important split was with the Sex feature. Unfortunately, the graphic representation is too large to easily read on this screen, but a higher quality image can be found in the `results` folder.
 
-
-
+# ![](../results/decision_tree.png)
 ```{r tree, fig.align = "center"}
 
 knitr::include_graphics(here::here("results/decision_tree.png"))
 ```
+
+> <center>
+> Fig 7. The graphical representation of our prediction tree model.
+> </center>
 
 **Predictions**
 
