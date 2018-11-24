@@ -6,36 +6,52 @@
 
 ## Project Description
 
-*Who will survive through the Titanic crash?*
+### Introduction
 
-We will do an analysis on the data set from [Kaggle's Titanic:Machine Learning from Disaster](https://www.kaggle.com/c/titanic). It includes information about the passengers on the Titanic and if they survived the disaster or not. All data was downloaded from the site as csv files and uploaded into the [data/raw/](https://github.com/UBC-MDS/sylvia_patrick_Titanic_Survival_ML/tree/master/data/raw) directory. 
+*Who will survive through the Titanic disaster?*
 
-To prove that we can load the dataset, we have created a `data_import.py` Python script to read and import the `training.csv` dataset. The script can be found in the `src` directory.
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/RMS_Titanic_3.jpg/1200px-RMS_Titanic_3.jpg)
 
-**Research Question:** What are the 3 strongest predictors of people who survived on the Titanic?
+> RMS Titanic departing Southampton on April 10, 1912. From [Wikipedia Commons](https://en.wikipedia.org/wiki/File:RMS_Titanic_3.jpg)
 
-This is a predictive research question, so we will be implementing a classification decision tree model. 
+For most people, "Titanic" is both a classic movie and a beautiful love story. However, the infamous Titanic catastrophe had also been said to be a prime example of social stratification and status discriminations in the 1900s. In addition to the "women and children first" evacuation policy, it had been rumored that the lives of the people with social prestige and high class standing were prioritized in the moment of danger. In this analysis, we used supervised machine learning (ML) to answer the question **"What are the 3 strongest predictors of people who survived on the Titanic?"**
 
-To effectively predict the survival of passengers onboard, we will analyze features including:
-- Passenger classes
+We retrieved the data from [Kaggle's Titanic:Machine Learning from Disaster](https://www.kaggle.com/c/titanic) and developed a decision-classification-tree machine learning model focusing on following features:
+
+- Passenger class
 - Sex
 - Age
-- Number of siblings/spouses onborad
-- Number of parents/children onbard
-- Fare prices
+- Number of siblings/spouses onboard
+- Number of parents/children onboard
+- Fare price
 
-We have just started learning about how to do this in our DSCI 571 class and would like to see how much we can learn throughout the course. 
+In our project, we explored the dataset by generating graphs of the features' distribution in the population of passengers. Subsequently we developed the decision tree model using Python's scikit-learn package and applied the model to a test dataset to predict the survival of the passenger given the same list of features. Lastly, we summarized our analysis by calculating the accuracy of our ML model and ranking the list of features' predictive power.
 
-**Project Goal:**
 
-- Create a classification tree that can efficiently predict if a passenger will survive the disaster based on the features listed above.
-- Inquire which features are the most predictive of the passengers' survivals. 
+### Usage
 
-**Project Overview**
+Multiple Python scripts were written in the analysis procedure. The following outlined the csteps taken to run this project.
 
-We forsee that at the end of the project, we will have the following summarizing results/figures:
+1. Clone this repository.
 
-- Histograms for each feature to visualizing differential distribution depending on survival state of the passengers(Survived or not). 
-- Accuracy score that evaluates the efficiency of our classification tree 
-- Graphvis figure to visualize the decision tree 
-- Table of importance/point graph that depicts the predictiveness of each feature in the survival of the passenger. 
+2. Run the following code in the terminal at the project's root repository.
+```
+python src/clean_data.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv    
+python src/data_exploratory.py data/cleaned/cleaned_train.csv results/images/
+python src/data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
+```
+
+### Dependencies
++ Python libraries:
+  + argparse
+  + pandas
+  + numpy
+  + sklearn
+  + matplotlib
+  + seaborn
+  + pickle
+  + graphviz
+
+
++ R packages:
+  + here
