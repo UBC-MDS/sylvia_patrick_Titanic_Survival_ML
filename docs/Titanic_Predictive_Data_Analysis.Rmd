@@ -119,13 +119,24 @@ We analysed passengers from the RMC Titanic and developed a classification-tree 
 
 ### References
 
-Documentation of scikit-learn 0.20.1. (n.d.). Retrieved from https://scikit-learn.org/stable/documentation.html
+Documentation of scikit-learn 0.20.1. (n.d.). Retrieved from
 
-On the importance of the i.i.d. assumption in statistical learning. (n.d.). Retrieved November 20, 2018, from https://stats.stackexchange.com/questions/213464/on-the-importance-of-the-i-i-d-assumption-in-statistical-learning
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://scikit-learn.org/stable/documentation.html
 
-Titanic: Machine Learning from Disaster. (n.d.). Retrieved November 20, 2018, from https://www.kaggle.com/c/titanic/data
+On the importance of the i.i.d. assumption in statistical learning. (n.d.). Retrieved November 20, 2018, from
 
-Swalin, A. (2018, January 31). How to Handle Missing Data – Towards Data Science. Retrieved from https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://stats.stackexchange.com/questions/213464/on-the-importance-of-the-i-i-d-assumption-in-statistical-learning
+
+
+Titanic: Machine Learning from Disaster. (n.d.). Retrieved November 20, 2018, from
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.kaggle.com/c/titanic/data
+
+
+Swalin, A. (2018, January 31). How to Handle Missing Data – Towards Data Science. Retrieved from
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
 
 \newpage
 
