@@ -55,7 +55,7 @@ train_prediction <- read.csv(here::here("results/train_prediction.csv"))
 knitr::kable(head(train_prediction, 10))
 ```
 
-> Pclass = Passenger Class, Sex = 0-Female, 1-male SibSp = #siblings/spouse onboard, Parch = #parents/children onboard, Survived = 0-Died, 1-Survived
+> Pclass = Passenger Class, Sex = 0-Female, 1-Male, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard, Survived = 0-Died, 1-Survived
 
 
 > **Table 2.*** Snippet of Predictions for Testing set.
@@ -65,7 +65,7 @@ test_prediction <- read.csv(here::here("results/test_prediction.csv"))
 knitr::kable(head(test_prediction, 10))
 ```
 
-> Pclass = Passenger Class, Sex = 0-Female, 1-male SibSp = #siblings/spouse onboard, Parch = #parents/children onboard, Survived = 0-Died, 1-Survived
+> Pclass = Passenger Class, Sex = 0-Female, 1-Male, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard, Survived = 0-Died, 1-Survived
 
 \newpage
 
@@ -95,6 +95,7 @@ rank <- read.csv(here::here("results/feature_ranks.csv"),
                  colClasses=c("NULL",NA,NA,NA,NA,NA))
 knitr::kable(rank)
 ```
+
 > Pclass = Passenger Class, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard
 
 From our results, we determined that the three most important features in our model were: 1) Sex, 2) Passenger Class, 3) Age. The gini importances were 0.4788, 0.1703, and 0.1555 respectively.
@@ -102,9 +103,9 @@ From our results, we determined that the three most important features in our mo
 
 ### Limitations and Assumptions
 
-First of all, the biggest limitation to our project was that we chose to explore only one type of model, the decision tree. Given more time and resources, we could have tested out different models to find the best predictive model for our problem. However, because we had not yet learned other ML models, we were wary of conducting an analysis with unfamiliar methods. In order to compensate for the lack of model exploration, we used cross validation to pick the best `max_depth` hyperparameter for our decision tree.  
+First of all, the biggest limitation to our project was that we chose to explore only one type of model, the decision tree. Given more time and resources, we could have tested out different models to find the best predictive model for our problem. However, because we had not yet learned other ML models, we were wary of conducting an analysis with unfamiliar methods. In order to compensate for the lack of model exploration, we used cross validation to pick the best `max_depth` hyperparameter for our decision tree
 
-Cross-validation assumed that all features were iid variables. However, two of our features might had been correlated. We had #siblings/spouse and #parent/children as two different features, but these two features could had been analyzed as one feature of "familey size". Logically, the two features would have influenced each other, thus undermined the effectiveness of our cross-validation. However, the high testing accuracies that we gained at the end of the analysis suggested that this was not a major problem. 
+Cross-validation assumed that all features were iid variables. However, two of our features might had been correlated. We had #siblings/spouse and #parent/children as two different features, but these two features could had been analyzed as one feature of "family size". Logically, the two features would have influenced each other, thus undermined the effectiveness of our cross-validation. However, the high testing accuracies that we gained at the end of the analysis suggested that this was not a major problem. 
 
 Another limitation that we encountered was that we used means and medians for the imputation of missing values. As an alternative, we could use regressors to make predictions on the best value to replace the missing values. However, this was beyond our current knowledge, so we resorted to means and medians as sufficient imputation methods for our predictions.
 
@@ -114,8 +115,28 @@ Lastly, for our prediction, we decided to subset the dataset to only the relevan
 
 We analysed passengers from the RMC Titanic and developed a classification-tree machine learning model that would allow us to predict which passenger was more likely to survive based on certain features. Our machine learning model achieved a fairly high accuracy of 84% in our testing model. In our analysis, we found that the most predictive features were gender, passenger class, and age, which cohered with our expectation that in addition to the "women and children first" evacuation policy, passengers with higher standing were prioritized as well. 
 
+\newpage
+
 ### References
 
+Documentation of scikit-learn 0.20.1. (n.d.). Retrieved from
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://scikit-learn.org/stable/documentation.html
+
+On the importance of the i.i.d. assumption in statistical learning. (n.d.). Retrieved November 20, 2018, from
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://stats.stackexchange.com/questions/213464/on-the-importance-of-the-i-i-d-assumption-in-statistical-learning
+
+
+Titanic: Machine Learning from Disaster. (n.d.). Retrieved November 20, 2018, from
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.kaggle.com/c/titanic/data
+
+
+Swalin, A. (2018, January 31). How to Handle Missing Data – Towards Data Science. Retrieved from
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
 
 \newpage
 
