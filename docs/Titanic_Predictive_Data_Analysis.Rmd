@@ -96,6 +96,7 @@ The shape of the distributions were very similar. Both ranges from 0 to ~70 year
 
 **Sex**
 
+![](../results/figure/sex.png)
 ```{r sex_fig, fig.align = "center"}
 
 knitr::include_graphics(here::here("results/figure/sex.png"))
@@ -111,6 +112,7 @@ This figure cohered with our expectation that there would be more females that s
 
 **Passenger Class**
 
+![](../results/figure/pclass.png)
 ```{r Pclass_fig, fig.align = "center"}
 
 knitr::include_graphics(here::here("results/figure/pclass.png"))
@@ -124,6 +126,7 @@ There seemed to be a pattern in the survival proportion of the passenger classes
 
 **Fare Price**
 
+![](../results/figure/Fare_plot.png)
 ```{r fare_fig, fig.align = "center"}
 
 knitr::include_graphics(here::here("results/figure/Fare_plot.png"))
@@ -136,6 +139,7 @@ knitr::include_graphics(here::here("results/figure/Fare_plot.png"))
 
 **Number of Parents/Children Onboard**
 
+![](../results/figure/Parch_plot.png)
 ```{r parch_fig, fig.align = "center"}
 
 knitr::include_graphics(here::here("results/figure/Parch_plot.png"))
@@ -147,6 +151,7 @@ knitr::include_graphics(here::here("results/figure/Parch_plot.png"))
 
 **Number of Siblings/Spouses Onboard**
 
+![](../results/figure/SibSp_plot.png)
 ```{r sibsp_fig, fig.align = "center"}
 
 knitr::include_graphics(here::here("results/figure/SibSp_plot.png"))

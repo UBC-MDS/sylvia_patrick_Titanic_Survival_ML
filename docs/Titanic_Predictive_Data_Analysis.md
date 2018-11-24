@@ -81,7 +81,7 @@ The shape of the distributions were very similar. Both ranges from 0 to ~70 year
 
 **Sex**
 
-<img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/sex.png" width="640" style="display: block; margin: auto;" />
+![](../results/figure/sex.png) <img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/sex.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Fig 2. Bar plot of sex distribution among the passengers that survived versus those did not survive.
@@ -91,7 +91,7 @@ This figure cohered with our expectation that there would be more females that s
 
 **Passenger Class**
 
-<img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/pclass.png" width="640" style="display: block; margin: auto;" />
+![](../results/figure/pclass.png) <img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/pclass.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Fig 3. Bar plot of passenger class distribution among the passengers that survived versus those did not survive.
@@ -101,7 +101,7 @@ There seemed to be a pattern in the survival proportion of the passenger classes
 
 **Fare Price**
 
-<img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/Fare_plot.png" width="640" style="display: block; margin: auto;" />
+![](../results/figure/Fare_plot.png) <img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/Fare_plot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Fig 4. Histograms of fare prices paid by the passengers that survived (left) and did not survive (right).
@@ -109,7 +109,7 @@ There seemed to be a pattern in the survival proportion of the passenger classes
 
 **Number of Parents/Children Onboard**
 
-<img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/Parch_plot.png" width="640" style="display: block; margin: auto;" />
+![](../results/figure/Parch_plot.png) <img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/Parch_plot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Fig 5. Histograms of number of parent or children that was onboard with the passengers that did survive (left) and did not survive (right).
@@ -117,7 +117,7 @@ There seemed to be a pattern in the survival proportion of the passenger classes
 
 **Number of Siblings/Spouses Onboard**
 
-<img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/SibSp_plot.png" width="640" style="display: block; margin: auto;" />
+![](../results/figure/SibSp_plot.png) <img src="/Users/pokepoke4/Google Drive/UBC MDS - Course Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML/results/figure/SibSp_plot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Fig 6. Histograms of number of siblings or spouse that was onboard with the passengers that did survive (left) and did not survive (right).
