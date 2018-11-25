@@ -15,7 +15,7 @@ library(here)
 
 **Who will survive through the Titanic disaster?**
 
-For most people, "Titanic" is both a classic movie and a beautiful love story. However, the infamous Titanic catastrophe had also been said to be a prime example of social stratification and status discriminations in the 1900s. In addition to the "women and children first" evacuation method [1], it had been rumored that the lives of the people with social prestige and high class standing were prioritized in the momment of danger. In this analysis, we used supervised machine learning (ML) to answer the question *"What are the 3 strongest predictors of people who survived on the Titanic?"*
+For most people, "Titanic" is both a classic movie and a beautiful love story. However, the infamous Titanic catastrophe had also been said to be a prime example of social stratification and status discriminations in the 1900s. In addition to the "women and children first" evacuation method, it had been rumored that the lives of the people with social prestige and high class standing were prioritized in the momment of danger. In this analysis, we used supervised machine learning (ML) to answer the question *"What are the 3 strongest predictors of people who survived on the Titanic?"*
 
 We retrieved the data from [Kaggle's Titanic:Machine Learning from Disaster](https://www.kaggle.com/c/titanic) and developed a decision-classification-tree machine learning model focusing on following features:
 
@@ -26,13 +26,13 @@ We retrieved the data from [Kaggle's Titanic:Machine Learning from Disaster](htt
 - Number of parents/children onboard
 - Fare price
 
-In our project, we explored the dataset by generating graphs of the features' distribution in the population of passengers. Subsequently we developed the decision tree model using Python's scikit-learn package and applied the model to a test dataset to predict the survival of the passenger given the same list of features. Lastly, we summarized our analysis by calculating the accuracy of our ML model and ranking the list of features' predictive power.
+In our project, we explored the dataset by generating graphs for distribution of each features in the population of passengers. Subsequently we developed the decision tree model using Python's scikit-learn package and applied the model to a test dataset to predict the survival of the passenger given the same list of features. Lastly, we summarized our analysis by calculating the accuracy of our ML model and ranking the predictive power of each feature.
 
 ### Exploratory Analysis
 
-The RMS Titanic carried enough life boats for only one third of the passengers, and our data was reflective of this. The data showed disproportionately larger proportion of passengers that did not survive. Thus, we compared the feature distributions within the desinated groups, the "survived "and the "did not survive". We plotted each feature according to the passenger's survival status (Appendix I). Which allowed us to gain a sense of the differential distribution of features depending on the passenger's survival. If all features were equally weighted dueing evacuation, we assume that the "survived" distribution would have frequecies that equaled to 1/3 of the "did not survive". However, that was not the case. 
+The RMS Titanic carried enough life boats for only one third of the passengers, and our data was reflective of this situaton. The data showed disproportionately larger proportion of passengers that did not survive. Therefore, we compared the feature distributions within each desinated groups, the "survived "and the "did not survive", and plotted each feature according to the passenger's survival status (Appendix I). This exploratory analysis allowed us to gain a sense of the differential distribution of features depending on the passenger's survival. If all features were equally weighted dueing evacuation, we assumed that the "survived" distribution would have frequecies equal to 1/3 of the "did not survive". However, that was not the case. 
 
-In general we found the data were reflective of the "women and children first" evacuation policy. There seemed to be larger proportion of women and children that survived than those that did not. Interestingly, we found that there were indeed larger proportion of survived passengers that had the features of "first class passenger" and "paid high fare price". On the other hand, family size (number of parent, children, siblings and spouse) did not appear to cause large difference
+In general we found the data reflective of the "women and children first" evacuation policy. There seemed to be larger proportion of women and children that survived than those that did not. Interestingly, we found that there were indeed larger proportion of survived passengers that had the features of "first class passenger" and "paid high fare price". On the other hand, family size (number of parent, children, siblings and spouse) did not appear to cause large differences.
 
 \newpage
 
@@ -42,11 +42,11 @@ In general we found the data were reflective of the "women and children first" e
 
 We generated a decision classification tree model using scikit-learn package. In order to reduce overfitting, we ran a 10-folds cross-validation to find the best `max-depth` hyperparameter and developed the learning model accordingly. 
 
-In our decision tree model, the first split on the feature "Sex", meaning that the model evaluated gender as the best general feature for predicting survival. A graphic representation can be found in the [`results` repository](https://github.com/UBC-MDS/sylvia_patrick_Titanic_Survival_ML/blob/master/results/decision_tree.png) folder.
+Our decision tree model made the first split on the feature "Sex", meaning that the model evaluated gender as the best general feature for predicting survival. A graphic representation can be found in the [`results` sub-repository](https://github.com/UBC-MDS/sylvia_patrick_Titanic_Survival_ML/blob/master/results/decision_tree.png).
 
 *Predictions*
 
-We ran our trained decision tree model on both the training and testing dateset to inspect its predictive capabilities (Table 1, Table 2). Qualitatively inspecting the target ("Survived") column and the "Prediction" column, we found that our model did reasonably well in the predicting both datasets.
+We ran our trained decision tree model on both the training and testing dateset to inspect its predictive capabilities (Table 1, Table 2). Qualitatively inspecting the target ("Survived") column and the "Prediction" column, we found our model did reasonably well predicting survivals in both datasets.
 
 > **Table 1.** Snippet of Predictions for both the Training set.
 
@@ -58,7 +58,7 @@ knitr::kable(head(train_prediction, 10))
 > Pclass = Passenger Class, Sex = 0-Female, 1-Male, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard, Survived = 0-Died, 1-Survived
 
 
-> **Table 2.*** Snippet of Predictions for Testing set.
+> **Table 2.** Snippet of Predictions for Testing set.
 
 ```{r predictions2}
 test_prediction <- read.csv(here::here("results/test_prediction.csv"))
@@ -71,7 +71,7 @@ knitr::kable(head(test_prediction, 10))
 
 **Model Performance**
 
-To quanititatively evaluate the accuracy of the model, we calculated both the training and testing accuracies by taking the proportion of correct predictions In the training and testing datasets (Table 3.). We then used these accuracy scores. What we were trying to inquire was whether or not there was an increase in the accuracy of our testing model in comparison to our training model. This was done to address possible overfitting problems. 
+To quanititatively evaluate the accuracy of the model, we calculated both the training and testing accuracies by taking the proportion of correct predictions in both the training and testing datasets (Table 3.). What we were trying to inquire was whether or not the accuracy of our testing model would decrease in comparison to our training model. This was done to address possible overfitting problems. 
 
 > **Table 3.** Prediction accuracy scores of ML model on the training and testing sets.
 
@@ -82,11 +82,11 @@ knitr::kable(accuracies, col.names = c("Dataset", "#Total Samples", "#Correct pr
                                       "#Incorrect predictions", "Accuracy Score"))
 ```
 
-As you can see, our model predicted the training data set with an accuracy of 0.7778, predicted the testing data set with an accuracy of 0.8421. Interestingly, we found higher accuracy in our test dataset than the training dataset, which indicated to us that our model was adequetely generalizable for data outside of the training model. 
+Our model predicted the training dataset with an accuracy of 0.7778, and predicted the testing dataset with an accuracy of 0.8421. Interestingly, we found higher accuracy in our test dataset than the training dataset, which suggested that our model was adequetely generalizable for data outside of the training dataset. 
 
 **Feature Importance Ranking**
 
-The ultimate goal of our research was to determine which three variables features were the most important among others. In order to achieve this goal, we took our classification tree model and generated an importance score using the `sci-kit` learn package. The importance score was evaluated based on "gini importance", which was also known as the "mean decrease in impurity". Essentially, the higher the importance value, the more important that feature was. 
+The ultimate goal of our research was to determine which three features were the most important among others. In order to achieve this goal, we took our classification tree model and generated an importance score using the `sci-kit` learn package. The importance score was evaluated based on "gini importance", which was also known as the "mean decrease in impurity". Essentially, the higher the importance value, the more important that feature was. 
 
 > **Table 4.** Ranks of each feature based on Gini Importance
 
@@ -103,40 +103,49 @@ From our results, we determined that the three most important features in our mo
 
 ### Limitations and Assumptions
 
-First of all, the biggest limitation to our project was that we chose to explore only one type of model, the decision tree. Given more time and resources, we could have tested out different models to find the best predictive model for our problem. However, because we had not yet learned other ML models, we were wary of conducting an analysis with unfamiliar methods. In order to compensate for the lack of model exploration, we used cross validation to pick the best `max_depth` hyperparameter for our decision tree
+First of all, the biggest limitation to our project was that we chose to explore only one type of model, the decision tree. Given more time and resources, we would test out different models to find the best predictive model for our problem. However, because we had not yet learned other ML models, we were wary of conducting an analysis with unfamiliar methods. In order to compensate for the lack of model exploration, we used cross validation to pick the best `max_depth` hyperparameter for our decision tree
 
-Cross-validation assumed that all features were iid variables. However, two of our features might had been correlated. We had #siblings/spouse and #parent/children as two different features, but these two features could had been analyzed as one feature of "family size". Logically, the two features would have influenced each other, thus undermined the effectiveness of our cross-validation. However, the high testing accuracies that we gained at the end of the analysis suggested that this was not a major problem. 
+Cross-validation assumed that all features were iid variables. However, two of our features might had been correlated. We had #siblings/spouse and #parent/children as two different features, but these two features could had been analyzed as one feature of "family size". Logically, the two features would have influenced each other, thus undermined the effectiveness of our cross-validation. However, our model's high testing accuracy suggested that this would not cause major downfalls in the machine learning.
 
 Another limitation that we encountered was that we used means and medians for the imputation of missing values. As an alternative, we could use regressors to make predictions on the best value to replace the missing values. However, this was beyond our current knowledge, so we resorted to means and medians as sufficient imputation methods for our predictions.
 
-Lastly, for our prediction, we decided to subset the dataset to only the relevant features that we were looking for in our research question. The entire data set that we originally started with had many more features such as where the passenger embarked, however, to simplify the question a little bit, we decided to use only a subset of the features to predict survival rates. Despite using less features, we believe that we still performed quite well with our predictions.
+Lastly, for our prediction, we decided to subset the dataset to only the relevant features that we were looking for in our research question. The entire data set that we originally started with had many more features such as where the passenger embarked, however, we decided to use only a subset of the features to predict survival rates for simplicity sake. Despite using less features, we believe that we still performed quite well with our predictions.
 
 ### Conclusion
 
-We analysed passengers from the RMC Titanic and developed a classification-tree machine learning model that would allow us to predict which passenger was more likely to survive based on certain features. Our machine learning model achieved a fairly high accuracy of 84% in our testing model. In our analysis, we found that the most predictive features were gender, passenger class, and age, which cohered with our expectation that in addition to the "women and children first" evacuation policy, passengers with higher standing were prioritized as well. 
+We analysed passengers from the RMC Titanic and developed a classification-tree machine learning model that would allow us to predict which passenger was more likely to survive based on certain features. Our machine learning model achieved a fairly high accuracy of 84% in our testing model. Additionally, we found that the most predictive features were gender, passenger class, and age, which cohered with our expectation that in addition to the "women and children first" evacuation policy, passengers with higher social standing were prioritized as well. 
 
 \newpage
 
 ### References
 
+&nbsp;
+
 Documentation of scikit-learn 0.20.1. (n.d.). Retrieved from
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://scikit-learn.org/stable/documentation.html
 
-On the importance of the i.i.d. assumption in statistical learning. (n.d.). Retrieved November 20, 2018, from
+&nbsp;
 
+On the importance of the i.i.d. assumption in statistical learning. (n.d.). Retrieved November 20, 2018, from
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://stats.stackexchange.com/questions/213464/on-the-importance-of-the-i-i-d-assumption-in-statistical-learning
 
+&nbsp;
 
 Titanic: Machine Learning from Disaster. (n.d.). Retrieved November 20, 2018, from
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.kaggle.com/c/titanic/data
 
+&nbsp;
 
-Swalin, A. (2018, January 31). How to Handle Missing Data – Towards Data Science. Retrieved from
+Swalin, A. (2018, January 31). How to Handle Missing Data - Towards Data Science. Retrieved from
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+
+&nbsp;
+
+Wikipedia - RMS Titanic. (n.d.). Retrieved from https://en.wikipedia.org/wiki/RMS_Titanic
 
 \newpage
 
