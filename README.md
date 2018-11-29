@@ -1,4 +1,4 @@
-# DSCI_522_Project: Predicting survival on the Titanic
+# Predicting survival on the Titanic
 
 **Project Contributors:** Sylvia Lee([sylvia19](https://github.ubc.ca/MDS-2018-19/DSCI_522_proposal_sylvia19/blob/master/README.md)) and Patrick Tung([ptung](https://github.ubc.ca/mds-2018-19/DSCI_522_proposal_ptung))
 
