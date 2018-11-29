@@ -41,7 +41,7 @@ def main():
     plt.legend(title = "Survival", labels = ["Did not survive", "Survived"])
     plt.xlabel("Passenger Class")
     plt.ylabel("Count")
-    plt.savefig(args.output_folder + "pclass.png")
+    plt.savefig(args.output_folder + "Pclass_plot.png")
 
     # Create plot for Sex groups
     sns.countplot(data = titanic_train, x = "Sex", hue = "Survived")
@@ -49,8 +49,8 @@ def main():
     plt.xticks(np.array([0,1]), ("Female", "Male"))
     plt.xlabel("Sex")
     plt.ylabel("Count")
-    plt.savefig(args.output_folder + "sex.png")
-    
+    plt.savefig(args.output_folder + "Sex_plot.png")
+
     print("Plots saved")
 
 def cont_plot(survived_df, died_df, cont_variables):
