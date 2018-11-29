@@ -1,3 +1,13 @@
+# Makefile
+# Patrick Tung, Sylvia Lee (Nov 29, 2018)
+
+# Description: This Makefile can be run to create our automatic
+#							 data analysis pipeline.
+
+# Usage:
+#		To create the report: make all
+#		To get a clean start: make clean
+
 all : docs/Titanic_Predictive_Data_Analysis.pdf
 	rm -f results/decision_tree
 
