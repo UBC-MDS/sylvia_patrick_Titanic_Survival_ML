@@ -39,10 +39,23 @@ Multiple Python scripts were written in the analysis procedure. The following ou
 2. Run the following code in the terminal at the project's root repository.
 
 ```
-python src/clean_data.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv    
+# Removes all unnecessary files to start the analaysis from scratch
+make clean
+
+# Runs all necessary scripts in order to generate the report
+make all
+```
+
+The `Makefile` would run the following scripts:
+```
+python src/clean_data.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
+
 python src/data_exploratory.py data/cleaned/cleaned_train.csv results/figure/
+
 python src/data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
+
 python src/summarize_data.py results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv results/
+
 Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 ```
 
