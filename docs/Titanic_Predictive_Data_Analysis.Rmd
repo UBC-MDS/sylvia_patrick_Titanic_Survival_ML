@@ -19,12 +19,12 @@ For most people, "Titanic" is both a classic movie and a beautiful love story. H
 
 We retrieved the data from [Kaggle's Titanic:Machine Learning from Disaster](https://www.kaggle.com/c/titanic) and developed a decision-classification-tree machine learning model focusing on following features:
 
-- Passenger class
-- Sex
-- Age
-- Number of siblings/spouses onboard
-- Number of parents/children onboard
-- Fare price
+- Passenger class (Categorical)
+- Sex (Categorical)
+- Age (Quantitative Continuous)
+- Number of siblings/spouses onboard (Quantitative Discrete)
+- Number of parents/children onboard (Quantitative Discrete)
+- Fare price (Quantitative Continuous)
 
 In our project, we explored the dataset by generating graphs for distribution of each features in the population of passengers. Subsequently we developed the decision tree model using Python's scikit-learn package and applied the model to a test dataset to predict the survival of the passenger given the same list of features. Lastly, we summarized our analysis by calculating the accuracy of our ML model and ranking the predictive power of each feature.
 
