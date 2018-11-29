@@ -92,7 +92,7 @@ The ultimate goal of our research was to determine which three features were the
 
 > **Table 4.** Ranks of each feature based on Gini Importance
 
-```{r feature_ranks, echo=FALSE, warning=TRUE}
+```{r feature_ranks, echo=FALSE, warning=FALSE}
 rank <- read.csv(here::here("results/feature_ranks.csv"), 
                  colClasses=c("NULL",NA,NA,NA,NA,NA))
 knitr::kable(rank)
