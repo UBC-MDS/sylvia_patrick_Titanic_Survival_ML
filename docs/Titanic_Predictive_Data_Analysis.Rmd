@@ -15,7 +15,7 @@ library(here)
 
 **Who will survive through the Titanic disaster?**
 
-For most people, "Titanic" is both a classic movie and a beautiful love story. However, the infamous Titanic catastrophe had also been said to be a prime example of social stratification and status discriminations in the 1900s. In addition to the "women and children first" evacuation method, it had been rumored that the lives of the people with social prestige and high class standing were prioritized in the momment of danger. In this analysis, we used supervised machine learning (ML) to answer the question *"What are the 3 strongest predictors of people who survived on the Titanic?"*
+For most people, "Titanic" is both a classic movie and a beautiful love story. However, the infamous Titanic catastrophe had also been said to be a prime example of social stratification and status discrimination in the 1900s. In addition to the "women and children first" evacuation method, it had been rumored that the lives of the people with social prestige and high class standing were prioritized in the moment of danger. In this analysis, we used supervised machine learning (ML) to answer the question *"What are the 3 strongest predictors of people who survived on the Titanic?"*
 
 We retrieved the data from [Kaggle's Titanic:Machine Learning from Disaster](https://www.kaggle.com/c/titanic) and developed a decision-classification-tree machine learning model focusing on following features:
 
@@ -30,7 +30,7 @@ In our project, we explored the dataset by generating graphs for distribution of
 
 ### Exploratory Analysis
 
-The RMS Titanic carried enough life boats for only one third of the passengers, and our data was reflective of this situaton. The data showed disproportionately larger proportion of passengers that did not survive. Therefore, we compared the feature distributions within each desinated groups, the "survived "and the "did not survive", and plotted each feature according to the passenger's survival status (Appendix I). This exploratory analysis allowed us to gain a sense of the differential distribution of features depending on the passenger's survival. If all features were equally weighted dueing evacuation, we assumed that the "survived" distribution would have frequecies equal to 1/3 of the "did not survive". However, that was not the case. 
+The RMS Titanic carried enough life boats for only one third of the passengers, and our data was reflective of this situation. The data showed disproportionately larger proportion of passengers that did not survive. Therefore, we compared the feature distributions within each designated groups, the "survived "and the "did not survive", and plotted each feature according to the passenger's survival status (Appendix I). This exploratory analysis allowed us to gain a sense of the differential distribution of features depending on the passenger's survival. If all features were equally weighted during evacuation, we assumed that the "survived" distribution would have frequencies equal to 1/3 of the "did not survive". However, that was not the case. 
 
 In general we found the data reflective of the "women and children first" evacuation policy. There seemed to be larger proportion of women and children that survived than those that did not. Interestingly, we found that there were indeed larger proportion of survived passengers that had the features of "first class passenger" and "paid high fare price". On the other hand, family size (number of parent, children, siblings and spouse) did not appear to cause large differences.
 
@@ -40,7 +40,7 @@ In general we found the data reflective of the "women and children first" evacua
 
 *Decision Tree*
 
-We generated a decision classification tree model using scikit-learn package. In order to reduce overfitting, we ran a 10-folds cross-validation to find the best `max-depth` hyperparameter and developed the learning model accordingly. 
+We generated a decision classification tree model using scikit-learn package. In order to reduce over fitting, we ran a 10-folds cross-validation to find the best `max-depth` hyperparameter and developed the learning model accordingly. 
 
 Our decision tree model made the first split on the feature "Sex", meaning that the model evaluated gender as the best general feature for predicting survival. A graphic representation can be found in the [`results` sub-repository](https://github.com/UBC-MDS/sylvia_patrick_Titanic_Survival_ML/blob/master/results/decision_tree.png).
 
@@ -71,7 +71,7 @@ knitr::kable(head(test_prediction, 10))
 
 **Model Performance**
 
-To quanititatively evaluate the accuracy of the model, we calculated both the training and testing accuracies by taking the proportion of correct predictions in both the training and testing datasets (Table 3.). What we were trying to inquire was whether or not the accuracy of our testing model would decrease in comparison to our training model. This was done to address possible overfitting problems. 
+To quantitatively evaluate the accuracy of the model, we calculated both the training and testing accuracies by taking the proportion of correct predictions in both the training and testing datasets (Table 3.). What we were trying to inquire was whether or not the accuracy of our testing model would decrease in comparison to our training model. This was done to address possible overfitting problems. 
 
 > **Table 3.** Prediction accuracy scores of ML model on the training and testing sets.
 
@@ -82,7 +82,7 @@ knitr::kable(accuracies, col.names = c("Dataset", "#Total Samples", "#Correct pr
                                       "#Incorrect predictions", "Accuracy Score"))
 ```
 
-Our model predicted the training dataset with an accuracy of 0.7778, and predicted the testing dataset with an accuracy of 0.8421. Interestingly, we found higher accuracy in our test dataset than the training dataset, which suggested that our model was adequetely generalizable for data outside of the training dataset. 
+Our model predicted the training dataset with an accuracy of 0.7778, and predicted the testing dataset with an accuracy of 0.8421. Interestingly, we found higher accuracy in our test dataset than the training dataset, which suggested that our model was adequately generalization for data outside of the training dataset. 
 
 **Feature Importance Ranking**
 
@@ -98,7 +98,7 @@ knitr::kable(rank)
 
 > Pclass = Passenger Class, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard
 
-From our results, we determined that the three most important features in our model were: 1) Sex, 2) Passenger Class, 3) Age. The gini importances were 0.4788, 0.1703, and 0.1555 respectively.
+From our results, we determined that the three most important features in our model were: 1) Sex, 2) Passenger Class, 3) Age. The gini importance were 0.4788, 0.1703, and 0.1555 respectively.
 
 
 ### Limitations and Assumptions
@@ -169,7 +169,7 @@ knitr::include_graphics(here::here("results/figure/Age_plot.png"))
 
 ```{r sex_fig, fig.align = "center"}
 
-knitr::include_graphics(here::here("results/figure/sex.png"))
+knitr::include_graphics(here::here("results/figure/Sex_plot.png"))
 
 ```
 
@@ -183,7 +183,7 @@ knitr::include_graphics(here::here("results/figure/sex.png"))
 
 ```{r Pclass_fig, fig.align = "center"}
 
-knitr::include_graphics(here::here("results/figure/pclass.png"))
+knitr::include_graphics(here::here("results/figure/Pclass_plot.png"))
 ```
 
 > <center>
