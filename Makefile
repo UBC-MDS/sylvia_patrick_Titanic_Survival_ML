@@ -9,7 +9,7 @@
 #		To get a clean start: make clean
 
 all : docs/Titanic_Predictive_Data_Analysis.pdf
-	rm -f results/decision_tree
+	rm -f results/figure/decision_tree
 
 data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv : src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv
 	python src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
@@ -17,10 +17,10 @@ data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv : src/01_data_clean
 results/figure/Age_plot.png results/figure/Sex_plot.png results/figure/Fare_plot.png results/figure/Parch_plot.png results/figure/Pclass_plot.png results/figure/SibSp_plot.png : src/02_data_exploratory_vis.py data/cleaned/cleaned_train.csv
 	python src/02_data_exploratory_vis.py data/cleaned/cleaned_train.csv results/figure/
 
-results/test_prediction.csv results/train_prediction.csv results/model/decision_tree_model.sav : src/03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
+results/test_prediction.csv results/train_prediction.csv results/model/decision_tree_model.sav results/figure/CV_accuracy_score_lineplot.png: src/03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
 	python src/03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
 
-results/accuracies.csv results/feature_ranks.csv results/decision_tree.png : results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv src/04_data_summarization.py
+results/accuracies.csv results/feature_ranks.csv results/figure/decision_tree.png : results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv src/04_data_summarization.py
 	python src/04_data_summarization.py results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv results/
 
 docs/Titanic_Predictive_Data_Analysis.pdf : docs/Titanic_Predictive_Data_Analysis.Rmd results/figure/Age_plot.png results/figure/Sex_plot.png results/figure/Fare_plot.png results/figure/Parch_plot.png results/figure/Pclass_plot.png results/figure/SibSp_plot.png results/test_prediction.csv results/train_prediction.csv results/accuracies.csv results/feature_ranks.csv
@@ -28,7 +28,7 @@ docs/Titanic_Predictive_Data_Analysis.pdf : docs/Titanic_Predictive_Data_Analysi
 
 clean :
 	rm -f data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
-	rm -f results/figure/Age_plot.png results/figure/Sex_plot.png results/figure/Fare_plot.png results/figure/Parch_plot.png results/figure/Pclass_plot.png results/figure/SibSp_plot.png
+	rm -f results/figure/Age_plot.png results/figure/Sex_plot.png results/figure/Fare_plot.png results/figure/Parch_plot.png results/figure/Pclass_plot.png results/figure/SibSp_plot.png results/figure/CV_accuracy_score_lineplot.png
 	rm -f results/test_prediction.csv results/train_prediction.csv results/model/decision_tree_model.sav
-	rm -f results/accuracies.csv results/feature_ranks.csv results/decision_tree.png
+	rm -f results/accuracies.csv results/feature_ranks.csv results/figure/decision_tree.png
 	rm -f docs/Titanic_Predictive_Data_Analysis.pdf docs/Titanic_Predictive_Data_Analysis.tex

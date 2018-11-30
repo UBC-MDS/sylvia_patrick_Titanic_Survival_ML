@@ -16,6 +16,7 @@
 import argparse
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.model_selection import cross_val_score
 import pickle
@@ -85,6 +86,12 @@ def calc_depth(Xtrain,ytrain):
         tree = DecisionTreeClassifier(max_depth=depth)
         cross_vals = cross_val_score(tree, Xtrain, ytrain, cv=10)
         accuracies.append(cross_vals.mean())
+
+    plt.plot(max_depths,accuracies)
+    plt.legend()
+    plt.xlabel("Max Depth")
+    plt.ylabel("Accuracy Score")
+    plt.savefig(args.output_folder + "/figure/CV_accuracy_score_lineplot.png")
 
     best_depth = max_depths[np.argmax(accuracies)]
     return(best_depth)
