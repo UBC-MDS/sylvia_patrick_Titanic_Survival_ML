@@ -18,12 +18,14 @@ For most people, "Titanic" is both a classic movie and a beautiful love story. H
 
 We retrieved the data from [Kaggle's Titanic:Machine Learning from Disaster](https://www.kaggle.com/c/titanic) and developed a decision-classification-tree machine learning model focusing on following features:
 
-- Passenger class
-- Sex
-- Age
-- Number of siblings/spouses onboard
-- Number of parents/children onboard
-- Fare price
+| Feature | Type | Description |
+| --- | --- | --- |
+| Pclass | Categorical | Passenger Class |
+| Sex | Categorical | Sex of Passenger |
+| Age | Continuous | Age of Passenger |
+| SibSp | Discrete | Number of siblings/spouses onboard |
+| Parch | Discrete | Number of parents/children onboard |
+| Fare | Continuous | Fare price |
 
 In our project, we explored the dataset by generating graphs of the features' distribution in the population of passengers. Subsequently we developed the decision tree model using Python's scikit-learn package and applied the model to a test dataset to predict the survival of the passenger given the same list of features. Lastly, we summarized our analysis by calculating the accuracy of our ML model and ranking the list of features' predictive power.
 
@@ -37,12 +39,26 @@ Multiple Python scripts were written in the analysis procedure. The following ou
 2. Run the following code in the terminal at the project's root repository.
 
 ```
-python src/clean_data.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv    
+# Removes all unnecessary files to start the analaysis from scratch
+make clean
+
+# Runs all necessary scripts in order to generate the report
+make all
+```
+
+The `Makefile` would run the following scripts:
+```
+python src/clean_data.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
+
 python src/data_exploratory.py data/cleaned/cleaned_train.csv results/figure/
+
 python src/data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
+
 python src/summarize_data.py results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv results/
+
 Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 ```
+
 
 ### Dependencies
 
