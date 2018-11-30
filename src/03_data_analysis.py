@@ -9,8 +9,8 @@
 #              the value for hyperparameters. It then returns the top three
 #              most important features.
 
-# Usage: python data_analysis.py <cleaned_train.csv path> <cleaned_test.csv path> <output_folder path/>
-# Example: python data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
+# Usage: python 03_data_analysis.py <cleaned_train.csv path> <cleaned_test.csv path> <output_folder path/>
+# Example: python 03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
 
 # Load dependencies
 import argparse
@@ -92,6 +92,7 @@ def calc_depth(Xtrain,ytrain):
     plt.xlabel("Max Depth")
     plt.ylabel("Accuracy Score")
     plt.savefig(args.output_folder + "/figure/CV_accuracy_score_lineplot.png")
+    print("CV Accuracy Exported")
 
     best_depth = max_depths[np.argmax(accuracies)]
     return(best_depth)
