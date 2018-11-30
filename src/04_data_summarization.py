@@ -101,7 +101,7 @@ def save_tree(model, feature_names, class_names = ["Not Survived", "Survived"] ,
                              special_characters = True)
 
     graph = graphviz.Source(dot_data, format = "png")
-    graph.render(args.output_folder + save_file_prefix)
+    graph.render(args.output_folder + "figure/" + save_file_prefix)
 
 if __name__ == "__main__":
     main()
