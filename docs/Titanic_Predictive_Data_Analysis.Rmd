@@ -42,7 +42,7 @@ In general, we found the data reflective of the "women and children first" evacu
 
 *Decision Tree*
 
-We generated a decision classification tree model using scikit-learn package. In order to reduce over fitting, we ran a 10-folds cross-validation to find the best `max-depth` hyperparameter and developed the learning model accordingly. 
+We generated a decision classification tree model using scikit-learn package. In order to reduce over fitting, we ran a 10-folds cross-validation to find the best `max-depth` hyperparameter and developed the learning model accordingly (Appendix II). 
 
 Our decision tree model made the first split on the feature "Sex", meaning that the model evaluated gender as the best general feature for predicting survival. A graphic representation can be found in the [`results` sub-repository](https://github.com/UBC-MDS/sylvia_patrick_Titanic_Survival_ML/blob/master/results/decision_tree.png).
 
@@ -231,3 +231,13 @@ knitr::include_graphics(here::here("results/figure/SibSp_plot.png"))
 > Append 6. Histograms of number of siblings or spouse that was onboard with the passengers that did survive (left) and did not survive (right).
 > </center>
 
+\newpage
+**Appendix II: Cross-Validation**
+
+```{r CV_accuracy_fig, fig.align = "center"}
+
+knitr::include_graphics(here::here("results/figure/CV_accuracy_score_lineplot.png"))
+```
+
+> <center>
+> Append 7. Line plot showing accuracy score of the decision classification tree model with different max_depth settings. The accuracy scores are obtained by 10-folds cross-validation using the training dataset.  
