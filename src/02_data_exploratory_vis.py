@@ -8,8 +8,8 @@
 #              categorical variables, and histograms are generated for numeric
 #              variables.
 
-# Usage:   python data_exploratory.py <train.csv path> <output_folder path>
-# Example: python data_exploratory.py data/cleaned/cleaned_train.csv results/figure/
+# Usage:   python 02_data_exploratory_vis.py <train.csv path> <output_folder path>
+# Example: python 02_data_exploratory_vis.py data/cleaned/cleaned_train.csv results/figure/
 
 import argparse
 import pandas as pd

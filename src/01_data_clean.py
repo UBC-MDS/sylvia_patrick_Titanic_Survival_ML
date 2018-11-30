@@ -7,9 +7,9 @@
 #              future analyses. Cleaning includes removing un-need data, fill NaN elements
 #              and joined gender_submission.csv with test.csv
 
-# Usage: python clean_data.py <train.csv path> <test.csv path> <gender_submission.csv path>
+# Usage: python 01_data_clean.py <train.csv path> <test.csv path> <gender_submission.csv path>
 #        <clean_train.csv path> <clean_test.csv path> <clean_total.csv path>
-# Example: python clean_data.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv
+# Example: python 01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv
 #          data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv    
 
 import argparse

@@ -7,8 +7,8 @@
 #              with the classification tree model. Output includes prediction accurcies,
 #              feature importance ranking and a graphical depiction of the tree model.
 
-# Usage:   python summarize_data.py <tree.sav path> <train.csv path> <test.csv path> <output_folder path>
-# Example: python summarize_data.py results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv results/
+# Usage:   python 04_data_summarization.py <tree.sav path> <train.csv path> <test.csv path> <output_folder path>
+# Example: python 04_data_summarization.py results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv results/
 
 # Load depencies
 import argparse
