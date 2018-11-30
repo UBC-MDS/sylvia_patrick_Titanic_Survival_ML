@@ -92,6 +92,7 @@ def calc_depth(Xtrain,ytrain):
     plt.xlabel("Max Depth")
     plt.ylabel("Accuracy Score")
     plt.savefig(args.output_folder + "/figure/CV_accuracy_score_lineplot.png")
+    print("CV Accuracy Exported")
 
     best_depth = max_depths[np.argmax(accuracies)]
     return(best_depth)
