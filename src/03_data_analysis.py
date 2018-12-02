@@ -18,7 +18,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score, KFold
 import pickle
 
 # Parse input arguments
@@ -80,11 +80,13 @@ def calc_depth(Xtrain,ytrain):
     Return:      best_depth(integer) = the max_depth that gave the best accuracies
     """
     max_depths = range(1, 50)
+    
+    kfold = KFold(n_splits=10, random_state=1234)
 
     accuracies = []
     for depth in max_depths:
-        tree = DecisionTreeClassifier(max_depth=depth)
-        cross_vals = cross_val_score(tree, Xtrain, ytrain, cv=10)
+        tree = DecisionTreeClassifier(max_depth=depth, random_state=1234)
+        cross_vals = cross_val_score(tree, Xtrain, ytrain, cv=kfold)
         accuracies.append(cross_vals.mean())
 
     plt.plot(max_depths,accuracies)
@@ -106,7 +108,7 @@ def fit(Xtrain, ytrain, best_depth):
                  best_depth(integer) = the max_depth that gave the best accuracies
     Return:      tree(DecisionTreeClassifier object) = classification tree model
     """
-    tree = DecisionTreeClassifier(max_depth=best_depth)
+    tree = DecisionTreeClassifier(max_depth=best_depth, random_state=1234)
     tree.fit(Xtrain,ytrain)
     return(tree)
 
@@ -130,5 +132,8 @@ if __name__ == "__main__":
 
     
 # Unit testing
-test_df = pd.DataFrame({'Age': [1, 2, 3, 4, 5, 4], 'Fare': [2, 3, 4, 5, 7, 21]})
-assert split_data(test_df) == {"Age": np.mean(test_df.Age), "Fare": np.median(test_df.Fare)}, 'The Age or Fare is incorrect.'
+unit_train_df = pd.DataFrame({'Age': [1, 2, 3, 3, 5, 4, 5, 2, 5, 2], 'Fare': [7, 2, 3, 2, 9, 4, 5, 2, 5, 2], "Survived": [0, 1, 1, 0, 1, 1, 1, 1, 0, 1]})
+unit_Xtrain, unit_ytrain = split_data(unit_train_df)
+assert unit_Xtrain.equals(unit_train_df.loc[:,"Age":"Fare"]), 'The data was split incorrectly.'
+assert unit_ytrain.equals(unit_train_df.Survived), 'The data was split incorrectly.'
+assert calc_depth(unit_Xtrain, unit_ytrain) == 1, 'The best depth is calcualted correctly.'

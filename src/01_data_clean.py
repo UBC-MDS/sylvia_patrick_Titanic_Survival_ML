@@ -68,5 +68,5 @@ if __name__ == "__main__":
     main()
 
 # Unit testing
-test_df = pd.DataFrame({'Age': [1, 2, 3, np.NaN, 5, 4], 'Fare': [2, np.NaN, 4, 5, 7, 21]})
-assert calcNAN(test_df) == {"Age": np.mean(test_df.Age), "Fare": np.nanmedian(test_df.Fare)}, 'The Age or Fare is incorrect.'
+unit_train_df = pd.DataFrame({'Age': [1, 2, 3, np.NaN, 5, 4], 'Fare': [2, np.NaN, 4, 5, 7, 21]})
+assert calcNAN(unit_train_df) == {"Age": np.mean(unit_train_df.Age), "Fare": np.nanmedian(unit_train_df.Fare)}, 'The Age or Fare is incorrect.'
