@@ -84,7 +84,7 @@ knitr::kable(accuracies, col.names = c("Dataset", "#Total Samples", "#Correct pr
                                       "#Incorrect predictions", "Accuracy Score"))
 ```
 
-Our model predicted the training dataset with an accuracy of 0.7778,  and predicted the testing dataset with an accuracy of 0.8421. Interestingly, we found higher accuracy in our test dataset than the training dataset, which suggested that our model was adequately generalization for data outside of the training dataset. 
+Our model predicted the training dataset with an accuracy of 0.7135,  and predicted the testing dataset with an accuracy of 0.9474. Interestingly, we found higher accuracy in our test dataset than the training dataset, which suggested that our model was adequately generalization for data outside of the training dataset. 
 
 **Feature Importance Ranking**
 
@@ -100,7 +100,7 @@ knitr::kable(rank)
 
 > Pclass = Passenger Class, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard
 
-From our results, we determined that the three most important features in our model were: 1) Sex, 2) Passenger Class, 3) Age. The gini importance were 0.4788, 0.1703, and 0.1555 respectively.
+From our results, we determined that the three most important features in our model were: 1) Sex, 2) Passenger Class, 3) Age. The gini importance were 0.6289, 0.2135, and 0.0619 respectively.
 
 
 ### Limitations and Assumptions

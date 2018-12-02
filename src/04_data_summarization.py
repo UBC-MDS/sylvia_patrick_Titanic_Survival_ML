@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# summarize_data.py
+# 04_summarize_data.py
 # Patrick Tung, Sylvia Lee (Nov 22, 2018)
 
 # Description: Generate analysis summaries from the predictions made

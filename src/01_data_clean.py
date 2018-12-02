@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# clean_data.py
+# 01_clean_data.py
 # Patrick Tung, Sylvia Lee (Nov 22, 2018)
 
 # Description: This script takes in the raw titanic datasets and clean it for
@@ -36,10 +36,10 @@ def main():
     titanic_train = titanic_train.loc[:,["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Survived"]]
     titanic_test = titanic_test.loc[:,["Pclass", "Sex", "Age", "SibSp", "Parch", "Fare"]]
 
-    #Add Survived column to test data
+    # Add Survived column to test data
     titanic_test = titanic_test.join(gender_submission)
 
-    #Process data
+    # Process data
     fillNAN([titanic_train, titanic_test])
     process_sex([titanic_train, titanic_test])
     print("Finished cleaning")
@@ -66,3 +66,7 @@ def process_sex(df):
 
 if __name__ == "__main__":
     main()
+
+# Unit testing
+unit_train_df = pd.DataFrame({'Age': [1, 2, 3, np.NaN, 5, 4], 'Fare': [2, np.NaN, 4, 5, 7, 21]})
+assert calcNAN(unit_train_df) == {"Age": np.mean(unit_train_df.Age), "Fare": np.nanmedian(unit_train_df.Fare)}, 'The Age or Fare is incorrect.'

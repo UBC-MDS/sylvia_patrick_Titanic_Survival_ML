@@ -11,6 +11,7 @@
 # Run all analysis
 all : docs/Titanic_Predictive_Data_Analysis.pdf
 	rm -f results/figure/decision_tree
+	rm -f docs/Titanic_Predictive_Data_Analysis.tex
 
 # Clean raw data
 data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv : src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv

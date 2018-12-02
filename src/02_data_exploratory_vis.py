@@ -16,6 +16,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+import os.path
 
 parser = argparse.ArgumentParser()
 parser.add_argument('input_file')
@@ -69,3 +70,11 @@ def cont_plot(survived_df, died_df, cont_variables):
 
 if __name__ == "__main__":
     main()
+
+# Unit testing
+assert os.path.isfile("results/figure/Age_plot.png"), 'Age plot does not exist.'
+assert os.path.isfile("results/figure/Fare_plot.png"), 'Fare plot does not exist.'
+assert os.path.isfile("results/figure/Parch_plot.png"), 'Parch plot does not exist.'
+assert os.path.isfile("results/figure/SibSp_plot.png"), 'SibSp plot does not exist.'
+assert os.path.isfile("results/figure/Pclass_plot.png"), 'Pclass_plot plot does not exist.'
+assert os.path.isfile("results/figure/Sex_plot.png"), 'Sex_plot plot does not exist.'
