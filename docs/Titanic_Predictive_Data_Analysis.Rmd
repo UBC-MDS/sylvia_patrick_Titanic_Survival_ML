@@ -1,7 +1,9 @@
 ---
 title: "Machine Learning - Predicting Survival on the Titanic"
 author: Sylvia Lee(sylvia19) and Patrick Tung(ptung)
-output: pdf_document
+output: 
+  pdf_document: 
+    latex_engine: xelatex
 date: 23 Nov, 2018
 ---
 
@@ -59,7 +61,6 @@ knitr::kable(head(train_prediction, 10))
 
 > Pclass = Passenger Class, Sex = 0-Female, 1-Male, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard, Survived = 0-Died, 1-Survived
 
-
 > **Table 2.** Snippet of Predictions for Testing set.
 
 ```{r predictions2}
@@ -68,8 +69,6 @@ knitr::kable(head(test_prediction, 10))
 ```
 
 > Pclass = Passenger Class, Sex = 0-Female, 1-Male, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard, Survived = 0-Died, 1-Survived
-
-\newpage
 
 **Model Performance**
 

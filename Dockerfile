@@ -21,6 +21,8 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
 # Install R packages
 RUN Rscript -e "install.packages('here')"
 RUN Rscript -e "install.packages('imager')"
+RUN Rscript -e "install.packages('tinytex')"
+RUN Rscript -e "tinytex::install_tinytex()"
 
 # Install python 3
 RUN apt-get update \
