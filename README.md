@@ -32,14 +32,34 @@ In our project, we explored the dataset by generating graphs of the features' di
 
 ### Usage
 
-Multiple Python scripts were written in the analysis procedure. The following outlined the steps taken to run this project.
+There are two recommended methods of running this analysis:
 
-1. Clone this repository.
+#### 1. Docker
 
-2. Run the following code in the terminal at the project's root repository.
+1. Install [Docker](https://www.docker.com/get-started)
+2. Download and clone this repository
+3. Use the command line to navigate to the root of this repo
+4. Type the following to run the analysis:
 
 ```
-# Removes all unnecessary files to start the analaysis from scratch
+docker run --rm -e PASSWORD=test -v <REPO ABSOLUTE PATH>:/home/rstudio/titanic_predictive_analysis titanic_predictive_analysis:0.1 make -C /home/rstudio/titanic_predictive_analysis all
+```
+
+5. If you would like a fresh start, type the following:
+
+```
+docker run --rm -e PASSWORD=test -v <REPO ABSOLUTE PATH>:/home/rstudio/titanic_predictive_analysis titanic_predictive_analysis:0.1 make -C /home/rstudio/titanic_predictive_analysis clean
+```
+
+
+#### 2. Make (without Docker)
+
+1. Clone this repository
+
+2. Run the following commands:
+
+```
+# Removes all unnecessary files to start the analysis from scratch
 make clean
 
 # Runs all necessary scripts in order to generate the report
@@ -58,7 +78,7 @@ python src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender
 # Outputs: 6 figures for EDA
 python src/02_data_exploratory_vis.py data/cleaned/cleaned_train.csv results/figure/
 
-# Step 3: This script takes in the cleaned training data and testing data and fits a decision tree to predict which passengers survived the Titanic. 
+# Step 3: This script takes in the cleaned training data and testing data and fits a decision tree to predict which passengers survived the Titanic.
 # Inputs: Cleaned training data, Cleaned testing data
 # Outputs: Decision tree model, Predictions for training set, Predictions for testing set, Cross validation accuracy plot
 python src/03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
@@ -75,16 +95,16 @@ Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 ### Dependencies
 
 + Python libraries:
-    + argparse v1.1
-    + pandas v0.23.4
-    + numpy v1.15.3
-    + sklearn v0.20.0
-    + matplotlib v3.0.1
-    + seaborn v0.9.0
-    + pickle v4.0
-    + graphviz v0.8.4
+    + argparse
+    + pandas
+    + numpy
+    + sklearn
+    + matplotlib
+    + seaborn
+    + pickle
+    + graphviz
 
 
 + R packages:
-    + here v0.1
-    + imager v0.41.1
+    + here
+    + imager
