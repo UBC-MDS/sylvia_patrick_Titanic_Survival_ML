@@ -17,6 +17,7 @@ import pandas as pd
 import numpy as np
 from sklearn.tree import export_graphviz
 import pickle
+import os
 
 # Parse input arguments
 parser = argparse.ArgumentParser()
@@ -55,14 +56,16 @@ def main():
     print("Export Decision Tree")
 
 
-# Description: evaluate accuracies of the predictions be comparing the targets and the predictions
-# Parameter:   df(dataframe) = dataframe with an addition prediction column
-#                                        appended to the whole_set dataframe
-#              set_name(string) = name of the set being evaluated ("train" or "test")
-# Return:      (list) = list containing the set name(str),
-#                       total number of predicted samples(int), number of correct predictions(int),
-#                       number of incorrect predictions(int), prediction accuracy(float)
 def get_accuracies(df, set_name):
+    """
+    Description: evaluate accuracies of the predictions be comparing the targets and the predictions
+    Parameter:   df(dataframe) = dataframe with an addition prediction column
+                                           appended to the whole_set dataframe
+                 set_name(string) = name of the set being evaluated ("train" or "test")
+    Return:      (list) = list containing the set name(str),
+                          total number of predicted samples(int), number of correct predictions(int),
+                          number of incorrect predictions(int), prediction accuracy(float)
+    """
     correct_predictions = df.Survived[df.Survived == df.Prediction].sum()
     incorrect_predictions = df.Survived[df.Survived != df.Prediction].sum()
     total = correct_predictions + incorrect_predictions
@@ -70,12 +73,14 @@ def get_accuracies(df, set_name):
     return([set_name, total, correct_predictions, incorrect_predictions, accuracy])
 
 
-# Description: rank the features from the most predictive to the least predictive
-# Parameter:   tree(DecisionTreeClassifier object) = classification tree model
-#              features(list) = list of feature names(str)
-# Return:      feature_rank_df(dataframe) = dataframe that contains the rank, feature
-#              name and importance measure in ascending order. Rank of 1 is most predictive
 def feature_rank(tree, features):
+    """
+    Description: rank the features from the most predictive to the least predictive
+    Parameter:   tree(DecisionTreeClassifier object) = classification tree model
+                 features(list) = list of feature names(str)
+    Return:      feature_rank_df(dataframe) = dataframe that contains the rank, feature
+                 name and importance measure in ascending order. Rank of 1 is most predictive
+    """
     importances = tree.feature_importances_
     importance_indices = importances.argsort()[::-1]
 
@@ -86,14 +91,16 @@ def feature_rank(tree, features):
 
     return(feature_rank_df)
 
-# Description: create the decision tree pictorical depiction using Graphviz package
-# Parameter:   model(DecisionTreeClassifier object) = classification tree model_selection
-#              feature_names(list) = list of feature names(str)
-#              class_names(list) = list of class names, optional
-#              save_file_prefix(str) = name for the exported file
-# Return:      no return variable, but a .png file will be exported in a "model" directory in the
-#              output_folder path.
 def save_tree(model, feature_names, class_names = ["Not Survived", "Survived"] , save_file_prefix = 'decision_tree'):
+    """
+    Description: create the decision tree pictorical depiction using Graphviz package
+    Parameter:   model(DecisionTreeClassifier object) = classification tree model_selection
+                 feature_names(list) = list of feature names(str)
+                 class_names(list) = list of class names, optional
+                 save_file_prefix(str) = name for the exported file
+    Return:      no return variable, but a .png file will be exported in a "model" directory in the
+                 output_folder path.
+    """
     dot_data = export_graphviz(model, out_file = None,
                              feature_names = feature_names,
                              class_names = class_names,
@@ -105,3 +112,7 @@ def save_tree(model, feature_names, class_names = ["Not Survived", "Survived"] ,
 
 if __name__ == "__main__":
     main()
+
+# Unit testing
+assert os.path.isfile("results/figure/decision_tree.png"), 'Decision tree plot does not exist.'
+assert os.path.isfile("results/figure/CV_accuracy_score_lineplot.png"), 'CV Accuracy score plot does not exist.'
