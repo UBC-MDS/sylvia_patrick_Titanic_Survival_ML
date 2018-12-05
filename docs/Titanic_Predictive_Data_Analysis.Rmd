@@ -232,6 +232,7 @@ knitr::include_graphics(here::here("results/figure/SibSp_plot.png"))
 > </center>
 
 \newpage
+
 **Appendix II: Cross-Validation**
 
 ```{r CV_accuracy_fig, fig.align = "center"}
