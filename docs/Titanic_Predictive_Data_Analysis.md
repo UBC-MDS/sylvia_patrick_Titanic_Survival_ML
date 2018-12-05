@@ -1,15 +1,7 @@
----
-title: "Machine Learning - Predicting Survival on the Titanic"
-author: Sylvia Lee(sylvia19) and Patrick Tung(ptung)
-output: github_document
-date: 23 Nov, 2018
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-#knitr::opts_knit$set(root.dir = here::here())
-library(here)
-```
+Machine Learning - Predicting Survival on the Titanic
+================
+Sylvia Lee(sylvia19) and Patrick Tung(ptung)
+23 Nov, 2018
 
 ### Introduction
 
@@ -19,14 +11,14 @@ For most people, "Titanic" is both a classic movie and a beautiful love story. H
 
 We retrieved the data from [Kaggle's Titanic: Machine Learning from Disaster](https://www.kaggle.com/c/titanic) and developed a decision-classification-tree machine learning model focusing on following features:
 
-| Feature | Type | Description |
-| --- | --- | --- |
-| Pclass | Categorical | Passenger Class |
-| Sex | Categorical | Sex of Passenger |
-| Age | Continuous | Age of Passenger |
-| SibSp | Discrete | Number of siblings/spouses onboard |
-| Parch | Discrete | Number of parents/children onboard |
-| Fare | Continuous | Fare price |
+| Feature | Type        | Description                        |
+|---------|-------------|------------------------------------|
+| Pclass  | Categorical | Passenger Class                    |
+| Sex     | Categorical | Sex of Passenger                   |
+| Age     | Continuous  | Age of Passenger                   |
+| SibSp   | Discrete    | Number of siblings/spouses onboard |
+| Parch   | Discrete    | Number of parents/children onboard |
+| Fare    | Continuous  | Fare price                         |
 
 As you may have already noticed, the data that we have received from Kaggle has much more features than what we are performing our data analysis with. We have chose to only use a subset of the features for several reasons regarding our ability to conduct a well formulated data analysis project. We believe that the above 6 features can still provide us with sufficient information for us to effectively produce a data analysis project and report.
 
@@ -52,24 +44,37 @@ We ran our trained decision tree model on both the training and testing dataset 
 
 > **Table 1.** Snippet of Predictions for both the Training set.
 
-```{r predictions, echo=FALSE}
-train_prediction <- read.csv(here::here("results/train_prediction.csv"))
-knitr::kable(head(train_prediction, 10))
-```
+|  PassengerId|  Pclass|  Sex|       Age|  SibSp|  Parch|     Fare|  Survived|  Prediction|
+|------------:|-------:|----:|---------:|------:|------:|--------:|---------:|-----------:|
+|            1|       3|    1|  22.00000|      1|      0|   7.2500|         0|           0|
+|            2|       1|    0|  38.00000|      1|      0|  71.2833|         1|           1|
+|            3|       3|    0|  26.00000|      0|      0|   7.9250|         1|           1|
+|            4|       1|    0|  35.00000|      1|      0|  53.1000|         1|           1|
+|            5|       3|    1|  35.00000|      0|      0|   8.0500|         0|           0|
+|            6|       3|    1|  29.69912|      0|      0|   8.4583|         0|           0|
+|            7|       1|    1|  54.00000|      0|      0|  51.8625|         0|           0|
+|            8|       3|    1|   2.00000|      3|      1|  21.0750|         0|           0|
+|            9|       3|    0|  27.00000|      0|      2|  11.1333|         1|           1|
+|           10|       2|    0|  14.00000|      1|      0|  30.0708|         1|           1|
 
-> Pclass = Passenger Class, Sex = 0-Female, 1-Male, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard, Survived = 0-Died, 1-Survived
-
+> Pclass = Passenger Class, Sex = 0-Female, 1-Male, SibSp = \#siblings/spouse onboard, Parch = \#parents/children onboard, Survived = 0-Died, 1-Survived
 
 > **Table 2.** Snippet of Predictions for Testing set.
 
-```{r predictions2}
-test_prediction <- read.csv(here::here("results/test_prediction.csv"))
-knitr::kable(head(test_prediction, 10))
-```
+|  PassengerId|  Pclass|  Sex|   Age|  SibSp|  Parch|     Fare|  Survived|  Prediction|
+|------------:|-------:|----:|-----:|------:|------:|--------:|---------:|-----------:|
+|          892|       3|    1|  34.5|      0|      0|   7.8292|         0|           0|
+|          893|       3|    0|  47.0|      1|      0|   7.0000|         1|           1|
+|          894|       2|    1|  62.0|      0|      0|   9.6875|         0|           0|
+|          895|       3|    1|  27.0|      0|      0|   8.6625|         0|           0|
+|          896|       3|    0|  22.0|      1|      1|  12.2875|         1|           1|
+|          897|       3|    1|  14.0|      0|      0|   9.2250|         0|           0|
+|          898|       3|    0|  30.0|      0|      0|   7.6292|         1|           1|
+|          899|       2|    1|  26.0|      1|      1|  29.0000|         0|           0|
+|          900|       3|    0|  18.0|      0|      0|   7.2292|         1|           1|
+|          901|       3|    1|  21.0|      2|      0|  24.1500|         0|           0|
 
-> Pclass = Passenger Class, Sex = 0-Female, 1-Male, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard, Survived = 0-Died, 1-Survived
-
-\newpage
+> Pclass = Passenger Class, Sex = 0-Female, 1-Male, SibSp = \#siblings/spouse onboard, Parch = \#parents/children onboard, Survived = 0-Died, 1-Survived
 
 **Model Performance**
 
@@ -77,14 +82,12 @@ To quantitatively evaluate the accuracy of the model, we calculated both the tra
 
 > **Table 3.** Prediction accuracy scores of ML model on the training and testing sets.
 
-```{r accuracies, echo=FALSE}
-accuracies <- read.csv(here::here("results/accuracies.csv"),
-                       colClasses=c("NULL",NA,NA,NA,NA,NA))
-knitr::kable(accuracies, col.names = c("Dataset", "#Total Samples", "#Correct predictions",
-                                      "#Incorrect predictions", "Accuracy Score"))
-```
+| Dataset |  \#Total Samples|  \#Correct predictions|  \#Incorrect predictions|  Accuracy Score|
+|:--------|----------------:|----------------------:|------------------------:|---------------:|
+| train   |              342|                    244|                       98|          0.7135|
+| test    |              152|                    144|                        8|          0.9474|
 
-Our model predicted the training dataset with an accuracy of 0.7135,  and predicted the testing dataset with an accuracy of 0.9474. Interestingly, we found higher accuracy in our test dataset than the training dataset, which suggested that our model was adequately generalization for data outside of the training dataset.
+Our model predicted the training dataset with an accuracy of 0.7135, and predicted the testing dataset with an accuracy of 0.9474. Interestingly, we found higher accuracy in our test dataset than the training dataset, which suggested that our model was adequately generalization for data outside of the training dataset.
 
 **Feature Importance Ranking**
 
@@ -92,22 +95,24 @@ The ultimate goal of our research was to determine which three features were the
 
 > **Table 4.** Ranks of each feature based on Gini Importance
 
-```{r feature_ranks, echo=FALSE}
-rank <- read.csv(here::here("results/feature_ranks.csv"),
-                 colClasses=c("NULL",NA,NA,NA))
-knitr::kable(rank)
-```
+|  Rank| Feature |  Importance|
+|-----:|:--------|-----------:|
+|     1| Sex     |   0.6288796|
+|     2| Pclass  |   0.2135254|
+|     3| Age     |   0.0618669|
+|     4| Fare    |   0.0508015|
+|     5| SibSp   |   0.0449265|
+|     6| Parch   |   0.0000000|
 
-> Pclass = Passenger Class, SibSp = #siblings/spouse onboard, Parch = #parents/children onboard
+> Pclass = Passenger Class, SibSp = \#siblings/spouse onboard, Parch = \#parents/children onboard
 
 From our results, we determined that the three most important features in our model were: 1) Sex, 2) Passenger Class, 3) Age. The gini importance were 0.6289, 0.2135, and 0.0619 respectively.
-
 
 ### Limitations and Assumptions
 
 First of all, the biggest limitation to our project was that we chose to explore only one type of model, the decision tree. Given more time and resources, we would test out different models to find the best predictive model for our problem. However, because we had not yet learned other ML models, we were wary of conducting an analysis with unfamiliar methods. In order to compensate for the lack of model exploration, we used cross validation to pick the best `max_depth` hyperparameter for our decision tree
 
-Cross-validation assumed that all features were i.i.d. variables. However, two of our features might had been correlated. We had #siblings/spouse and #parent/children as two different features, but these two features could had been analyzed as one feature of "family size". Logically, the two features would have influenced each other, thus undermined the effectiveness of our cross-validation. However, our model's high testing accuracy suggested that this would not cause major downfalls in the machine learning.
+Cross-validation assumed that all features were i.i.d. variables. However, two of our features might had been correlated. We had \#siblings/spouse and \#parent/children as two different features, but these two features could had been analyzed as one feature of "family size". Logically, the two features would have influenced each other, thus undermined the effectiveness of our cross-validation. However, our model's high testing accuracy suggested that this would not cause major downfalls in the machine learning.
 
 Another limitation that we encountered was that we used means and medians for the imputation of missing values. As an alternative, we could use regressors to make predictions on the best value to replace the missing values. However, this was beyond our current knowledge, so we resorted to means and medians as sufficient imputation methods for our predictions.
 
@@ -117,127 +122,92 @@ Lastly, for our prediction, we decided to subset the dataset to only the relevan
 
 We analysed passengers from the RMC Titanic and developed a classification-tree machine learning model that would allow us to predict which passenger was more likely to survive based on certain features. Our machine learning model achieved a fairly high accuracy of 94% in our testing model. Additionally, we found that the most predictive features were gender, passenger class, and age, which cohered with our expectation that in addition to the "women and children first" evacuation policy, passengers with higher social standing were prioritized as well.
 
-\newpage
-
 ### References
 
-&nbsp;
+ 
 
 Documentation of scikit-learn 0.20.1. (n.d.). Retrieved from
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://scikit-learn.org/stable/documentation.html
+      <https://scikit-learn.org/stable/documentation.html>
 
-&nbsp;
+ 
 
 On the importance of the i.i.d. assumption in statistical learning. (n.d.). Retrieved November 20, 2018, from
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://stats.stackexchange.com/questions/213464/on-the-importance-of-the-i-i-d-assumption-in-statistical-learning
+      <https://stats.stackexchange.com/questions/213464/on-the-importance-of-the-i-i-d-assumption-in-statistical-learning>
 
-&nbsp;
+ 
 
 Titanic: Machine Learning from Disaster. (n.d.). Retrieved November 20, 2018, from
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://www.kaggle.com/c/titanic/data
+      <https://www.kaggle.com/c/titanic/data>
 
-&nbsp;
+ 
 
 Swalin, A. (2018, January 31). How to Handle Missing Data - Towards Data Science. Retrieved from
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+      <https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4>
 
-&nbsp;
+ 
 
-Wikipedia - RMS Titanic. (n.d.). Retrieved from https://en.wikipedia.org/wiki/RMS_Titanic
+Wikipedia - RMS Titanic. (n.d.). Retrieved from <https://en.wikipedia.org/wiki/RMS_Titanic>
 
-\newpage
-
-## Appendix
+Appendix
+--------
 
 **Appendix I: EDA Figures**
 
 *Age*
 
-```{r age_fig ,fig.align = "center"}
-knitr::include_graphics(here::here("results/figure/Age_plot.png"))
-```
+<img src="/home/rstudio/titanic_predictive_analysis/results/figure/Age_plot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Append 1. Histograms of ages among the passengers that survived (left) and did not survive (right).
 > </center>
 
-\newpage
-
 *Sex*
 
-```{r sex_fig, fig.align = "center"}
-
-knitr::include_graphics(here::here("results/figure/Sex_plot.png"))
-
-```
+<img src="/home/rstudio/titanic_predictive_analysis/results/figure/Sex_plot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Append 2. Bar plot of sex distribution among the passengers that survived versus those did not survive.
 > </center>
 
-\newpage
-
 *Passenger Class*
 
-```{r Pclass_fig, fig.align = "center"}
-
-knitr::include_graphics(here::here("results/figure/Pclass_plot.png"))
-```
+<img src="/home/rstudio/titanic_predictive_analysis/results/figure/Pclass_plot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Append 3. Bar plot of passenger class distribution among the passengers that survived versus those did not survive.
 > </center>
 
-\newpage
-
 *Fare Price*
 
-```{r fare_fig, fig.align = "center"}
-
-knitr::include_graphics(here::here("results/figure/Fare_plot.png"))
-```
+<img src="/home/rstudio/titanic_predictive_analysis/results/figure/Fare_plot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Append 4. Histograms of fare prices paid by the passengers that survived (left) and did not survive (right).
 > </center>
 
-\newpage
-
 *Number of Parents/Children Onboard*
 
-```{r parch_fig, fig.align = "center"}
-
-knitr::include_graphics(here::here("results/figure/Parch_plot.png"))
-```
+<img src="/home/rstudio/titanic_predictive_analysis/results/figure/Parch_plot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Append 5. Histograms of number of parent or children that was onboard with the passengers that did survive (left) and did not survive (right).
 > </center>
 
-\newpage
-
 *Number of Siblings/Spouses Onboard*
 
-```{r sibsp_fig, fig.align = "center"}
-
-knitr::include_graphics(here::here("results/figure/SibSp_plot.png"))
-```
+<img src="/home/rstudio/titanic_predictive_analysis/results/figure/SibSp_plot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
 > Append 6. Histograms of number of siblings or spouse that was onboard with the passengers that did survive (left) and did not survive (right).
 > </center>
 
-\newpage
-**Appendix II: Cross-Validation**
+\*Appendix II: Cross-Validation\*\*
 
-```{r CV_accuracy_fig, fig.align = "center"}
-
-knitr::include_graphics(here::here("results/figure/CV_accuracy_score_lineplot.png"))
-```
+<img src="/home/rstudio/titanic_predictive_analysis/results/figure/CV_accuracy_score_lineplot.png" width="640" style="display: block; margin: auto;" />
 
 > <center>
-> Append 7. Line plot showing accuracy score of the decision classification tree model with different max_depth settings. The accuracy scores are obtained by 10-folds cross-validation using the training dataset.  
+> Append 7. Line plot showing accuracy score of the decision classification tree model with different max\_depth settings. The accuracy scores are obtained by 10-folds cross-validation using the training dataset.
