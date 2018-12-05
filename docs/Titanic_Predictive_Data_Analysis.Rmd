@@ -1,7 +1,7 @@
 ---
 title: "Machine Learning - Predicting Survival on the Titanic"
 author: Sylvia Lee(sylvia19) and Patrick Tung(ptung)
-output: github_document
+output: pdf_document
 date: 23 Nov, 2018
 ---
 
