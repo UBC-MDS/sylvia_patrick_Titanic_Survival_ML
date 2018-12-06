@@ -6,8 +6,8 @@
 
 # Usage:
 #   To build the docker image: docker build --tag titanic_predictive_analysis:0.1 .
-#		To create the report: docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis all
-#		To get a clean start: docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis clean
+#		To create the report: docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C '/home/titanic_predictive_analysis' all
+#		To get a clean start: docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C '/home/titanic_predictive_analysis' clean
 
 # Use rocker/tidyverse as the base image
 FROM rocker/tidyverse
