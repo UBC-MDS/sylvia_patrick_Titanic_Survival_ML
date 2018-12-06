@@ -47,13 +47,13 @@ docker pull patricktung/sylvia_patrick_titanic_survival_ml
 5. Type the following code into terminal to run the analysis:
 
 ```
-docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis all
+docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C '/home/titanic_predictive_analysis' all
 ```
 
 6. If you would like a fresh start, type the following:
 
 ```
-docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis clean
+docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C '/home/titanic_predictive_analysis' clean
 ```
 
 #### 2. Make (without Docker)
