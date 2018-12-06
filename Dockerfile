@@ -6,15 +6,14 @@
 
 # Usage:
 #   To build the docker image: docker build --tag titanic_predictive_analysis:0.1 .
-#		To create the report: docker run --rm -e PASSWORD=test -v /Users/pokepoke4/Google\ Drive/UBC\ MDS\ -\ Course\ Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML:/home/rstudio/titanic_predictive_analysis titanic_predictive_analysis:0.1 make -C '/home/rstudio/titanic_predictive_analysis' all
-#		To get a clean start: docker run --rm -e PASSWORD=test -v /Users/pokepoke4/Google\ Drive/UBC\ MDS\ -\ Course\ Material/Block_3/DSCI_522/sylvia_patrick_Titanic_Survival_ML:/home/rstudio/titanic_predictive_analysis titanic_predictive_analysis:0.1 make -C '/home/rstudio/titanic_predictive_analysis' clean
+#		To create the report: docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis all
+#		To get a clean start: docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis clean
 
 # Use rocker/tidyverse as the base image
 FROM rocker/tidyverse
 
 # Install R packages
 RUN Rscript -e "install.packages('here')"
-RUN Rscript -e "install.packages('imager')"
 RUN Rscript -e "install.packages('tinytex')"
 RUN Rscript -e "tinytex::install_tinytex()"
 
