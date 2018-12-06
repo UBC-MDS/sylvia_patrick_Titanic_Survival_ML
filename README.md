@@ -38,17 +38,22 @@ There are two recommended methods of running this analysis:
 
 1. Install [Docker](https://www.docker.com/get-started)
 2. Download and clone this repository
-3. Use the command line to navigate to the root of this repo
-4. Type the following to run the analysis:
-
+3. Run the following code in terminal to download the Docker image:
 ```
-docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis all
+docker pull patricktung/sylvia_patrick_titanic_survival_ml
 ```
 
-5. If you would like a fresh start, type the following:
+4. Use the command line to navigate to the root of this repo
+5. Type the following code into terminal to run the analysis:
 
 ```
-docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis clean
+docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C '/home/titanic_predictive_analysis' all
+```
+
+6. If you would like a fresh start, type the following:
+
+```
+docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C '/home/titanic_predictive_analysis' clean
 ```
 
 #### 2. Make (without Docker)
@@ -77,6 +82,7 @@ make all
 python src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
 ```
 
+
 *Step 2*: This script takes the cleaned training data and creates some visualizations that are ready for exploratory data analysis.
 
 *Inputs*: Cleaned training data
@@ -85,6 +91,7 @@ python src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender
 ```
 python src/02_data_exploratory_vis.py data/cleaned/cleaned_train.csv results/figure/
 ```
+
 
 *Step 3*: This script takes in the cleaned training data and testing data and fits a decision tree to predict which passengers survived the Titanic.
 
@@ -95,6 +102,7 @@ python src/02_data_exploratory_vis.py data/cleaned/cleaned_train.csv results/fig
 python src/03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
 ```
 
+
 *Step 4*: This script takes in the decision tree model and the predictions to create summary data of the accuracy, feature ranks, and the graphic representation of our decision tree.
 
 *Inputs*: Decision tree model, Predictions for training set, Predictions for testing
@@ -104,6 +112,7 @@ python src/03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/clean
 python src/04_data_summarization.py results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv results/
 ```
 
+
 *Step 5*: This line renders the RMarkdown file with the appropriate files created from the steps before.
 ```
 Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
@@ -111,7 +120,7 @@ Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 
 ### Dependency Diagram of the Makefile
 
-![](Makefile.png)
+<img src="https://github.com/tungpatrick/sylvia_patrick_Titanic_Survival_ML/blob/master/Makefile.png" alt="dependency diagram" height="200">
 
 ### Dependencies
 
