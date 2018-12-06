@@ -116,16 +116,15 @@ Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 ### Dependencies
 
 + Python libraries:
-    + argparse
-    + pandas
-    + numpy
-    + sklearn
-    + matplotlib
-    + seaborn
-    + pickle
-    + graphviz
+    + argparse v1.1
+    + pandas v0.23.4
+    + numpy v1.15.3
+    + sklearn v0.20.0
+    + matplotlib v3.0.1
+    + seaborn v0.9.0
+    + pickle v4.0
+    + graphviz v0.8.4
 
 
 + R packages:
-    + here
-    + imager
+    + here v0.1
