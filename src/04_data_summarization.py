@@ -66,8 +66,8 @@ def get_accuracies(df, set_name):
                           total number of predicted samples(int), number of correct predictions(int),
                           number of incorrect predictions(int), prediction accuracy(float)
     """
-    correct_predictions = df.Survived[df.Survived == df.Prediction].sum()
-    incorrect_predictions = df.Survived[df.Survived != df.Prediction].sum()
+    correct_predictions = df.Survived[df.Survived == df.Prediction].count()
+    incorrect_predictions = df.Survived[df.Survived != df.Prediction].count()
     total = correct_predictions + incorrect_predictions
     accuracy = round(correct_predictions / total, 4)
     return([set_name, total, correct_predictions, incorrect_predictions, accuracy])
@@ -114,5 +114,21 @@ if __name__ == "__main__":
     main()
 
 # Unit testing
-assert os.path.isfile("results/figure/decision_tree.png"), 'Decision tree plot does not exist.'
-assert os.path.isfile("results/figure/CV_accuracy_score_lineplot.png"), 'CV Accuracy score plot does not exist.'
+# ============
+
+# Create toy dataset for unit tests
+unit_train_df = pd.DataFrame({'Age': [1, 2, 3, 3, 5, 4, 5, 2, 5, 2], 'Fare': [7, 2, 3, 2, 9, 4, 5, 2, 5, 2], \
+                            "Survived": [0, 1, 1, 0, 1, 1, 1, 1, 0, 1], "Prediction": [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]})
+
+# Unit test for get_accuracies()
+assert type(get_accuracies(unit_train_df, "Unit_test")) == list, 'No list returned'
+assert get_accuracies(unit_train_df, "Unit_test")[0] == "Unit_test", 'Wrong label name'
+assert get_accuracies(unit_train_df, "Unit_test") == ["Unit_test", 10, 8, 2, 0.8], 'Incorrect calculation of accuracies'
+
+# Unit test for feature_rank()
+unit_test_rank = pd.read_csv("results/feature_ranks.csv")
+assert np.sum(unit_test_rank.Rank) == 21, 'Incorrect number of ranks'
+assert len(unit_test_rank) == 6, 'Incorrect number of features'
+
+# Unit test for save_tree()
+assert os.path.isfile("results/figure/decision_tree.png"), 'Decision tree visual not created'
