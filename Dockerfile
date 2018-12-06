@@ -14,7 +14,6 @@ FROM rocker/tidyverse
 
 # Install R packages
 RUN Rscript -e "install.packages('here')"
-RUN Rscript -e "install.packages('imager')"
 RUN Rscript -e "install.packages('tinytex')"
 RUN Rscript -e "tinytex::install_tinytex()"
 

@@ -42,13 +42,13 @@ There are two recommended methods of running this analysis:
 4. Type the following to run the analysis:
 
 ```
-docker run --rm -e PASSWORD=test -v <REPO ABSOLUTE PATH>:/home/rstudio/titanic_predictive_analysis titanic_predictive_analysis:0.1 make -C /home/rstudio/titanic_predictive_analysis all
+docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis all
 ```
 
 5. If you would like a fresh start, type the following:
 
 ```
-docker run --rm -e PASSWORD=test -v <REPO ABSOLUTE PATH>:/home/rstudio/titanic_predictive_analysis titanic_predictive_analysis:0.1 make -C /home/rstudio/titanic_predictive_analysis clean
+docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis clean
 ```
 
 
@@ -67,11 +67,13 @@ make all
 ```
 
 The `Makefile` would run the following scripts:
+
+*Step 1*: This script takes in the raw Titanic data and cleans it into a data set that fits our research question.
+*Inputs*: Raw training data, Raw test data
+*Outputs*: Cleaned training data, Cleaned test data
 ```
-# Step 1: This script takes in the raw Titanic data and cleans it into a data set that fits our research question.
-# Inputs: Raw training data, Raw test data
-# Outputs: Cleaned training data, Cleaned test data
 python src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
+```
 
 # Step 2: This script takes the cleaned training data and creates some visualizations that are ready for exploratory data analysis.
 # Inputs: Cleaned training data
