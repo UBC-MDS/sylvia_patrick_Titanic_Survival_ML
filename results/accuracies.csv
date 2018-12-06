@@ -1,3 +1,3 @@
 ,set,n_total,n_correct_pred,n_incorrect_pred,accuracy
-0,train,342,244,98,0.7135
-1,test,152,144,8,0.9474
+0,train,891,737,154,0.8272
+1,test,418,404,14,0.9665
