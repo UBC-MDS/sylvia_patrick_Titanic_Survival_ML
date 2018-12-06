@@ -120,7 +120,7 @@ Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 
 ### Dependency Diagram of the Makefile
 
-<img src="https://github.com/tungpatrick/sylvia_patrick_Titanic_Survival_ML/blob/master/Makefile.png" alt="dependency diagram" height="330">
+<img src="https://github.com/tungpatrick/sylvia_patrick_Titanic_Survival_ML/blob/master/Makefile.png" alt="dependency diagram" height="280">
 
 ### Dependencies
 
