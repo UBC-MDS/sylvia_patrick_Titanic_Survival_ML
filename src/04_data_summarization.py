@@ -126,7 +126,9 @@ assert get_accuracies(unit_train_df, "Unit_test")[0] == "Unit_test", 'Wrong labe
 assert get_accuracies(unit_train_df, "Unit_test") == ["Unit_test", 10, 8, 2, 0.8], 'Incorrect calculation of accuracies'
 
 # Unit test for feature_rank()
-
+unit_test_rank = pd.read_csv("results/feature_ranks.csv")
+assert np.sum(unit_test_rank.Rank) == 21, 'Incorrect number of ranks'
+assert len(unit_test_rank) == 6, 'Incorrect number of features'
 
 # Unit test for save_tree()
 assert os.path.isfile("results/figure/decision_tree.png"), 'Decision tree visual not created'
