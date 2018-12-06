@@ -12,12 +12,6 @@
 # Use rocker/tidyverse as the base image
 FROM rocker/tidyverse
 
-# Install the cowsay package
-RUN apt-get update -qq && apt-get -y --no-install-recommends install \
-  && install2.r --error \
-    --deps TRUE \
-    cowsay
-
 # Install R packages
 RUN Rscript -e "install.packages('here')"
 RUN Rscript -e "install.packages('imager')"
