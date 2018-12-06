@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.model_selection import cross_val_score, KFold
 import pickle
+import os.path
 
 # Parse input arguments
 parser = argparse.ArgumentParser()
@@ -45,10 +46,12 @@ def main():
     Xtest, ytest = split_data(titanic_test)
 
     # Cross Validation to find the best max_depth for decision classification tree
-    best_depth = calc_depth(Xtrain, ytrain)
+    best_depth, accuracies = calc_depth(Xtrain, ytrain)
+    create_cv_plot(accuracies)
 
     # Create decision tree and fit model
-    tree = fit(Xtrain, ytrain, best_depth)
+    tree = DecisionTreeClassifier(max_depth=best_depth, random_state=1234)
+    tree.fit(Xtrain,ytrain)
 
     # Predict using train and test set
     predicted_train = predict(tree, Xtrain, titanic_train)
@@ -80,7 +83,7 @@ def calc_depth(Xtrain,ytrain):
     Return:      best_depth(integer) = the max_depth that gave the best accuracies
     """
     max_depths = range(1, 50)
-    
+
     kfold = KFold(n_splits=10, random_state=1234)
 
     accuracies = []
@@ -89,28 +92,23 @@ def calc_depth(Xtrain,ytrain):
         cross_vals = cross_val_score(tree, Xtrain, ytrain, cv=kfold)
         accuracies.append(cross_vals.mean())
 
+    best_depth = max_depths[np.argmax(accuracies)]
+
+    return(best_depth, accuracies)
+
+def create_cv_plot(accuracies):
+    """
+    Description: Plot accuracies vs different values of max_depth hyperparameter
+    Parameter:   accuracies = list containing accuracies from cross validation
+    Return:      None. Plot output to results/figure/ directory
+    """
+    max_depths = range(1, len(accuracies) + 1)
     plt.plot(max_depths,accuracies)
     plt.legend()
     plt.xlabel("Max Depth")
     plt.ylabel("Accuracy Score")
     plt.savefig(args.output_folder + "/figure/CV_accuracy_score_lineplot.png")
     print("CV Accuracy Exported")
-
-    best_depth = max_depths[np.argmax(accuracies)]
-    return(best_depth)
-
-
-def fit(Xtrain, ytrain, best_depth):
-    """
-    Description: create decision classification tree
-    Parameter:   Xtrain(dataframe) = dataframe containing the training feature columns
-                 ytrain(dataframe) = dataframe containing the training target column
-                 best_depth(integer) = the max_depth that gave the best accuracies
-    Return:      tree(DecisionTreeClassifier object) = classification tree model
-    """
-    tree = DecisionTreeClassifier(max_depth=best_depth, random_state=1234)
-    tree.fit(Xtrain,ytrain)
-    return(tree)
 
 def predict(tree, feature_set, whole_set):
     """
@@ -130,10 +128,31 @@ def predict(tree, feature_set, whole_set):
 if __name__ == "__main__":
     main()
 
-    
+
 # Unit testing
+# ============
+
+# Create toy data set for unit testing
 unit_train_df = pd.DataFrame({'Age': [1, 2, 3, 3, 5, 4, 5, 2, 5, 2], 'Fare': [7, 2, 3, 2, 9, 4, 5, 2, 5, 2], "Survived": [0, 1, 1, 0, 1, 1, 1, 1, 0, 1]})
+
+# Unit test for split_data()
 unit_Xtrain, unit_ytrain = split_data(unit_train_df)
 assert unit_Xtrain.equals(unit_train_df.loc[:,"Age":"Fare"]), 'The data was split incorrectly.'
 assert unit_ytrain.equals(unit_train_df.Survived), 'The data was split incorrectly.'
-# assert calc_depth(unit_Xtrain, unit_ytrain) == 1, 'The best depth is calcualted correctly.'
+
+# Unit test for calc_depth()
+assert calc_depth(unit_Xtrain, unit_ytrain) == (1, [0.7, 0.7, 0.6, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]) , 'The best depth is calculated incorrectly.'
+
+#Unit test for create_cv_plot()
+assert os.path.isfile("results/figure/CV_accuracy_score_lineplot.png"), 'CV_accuracy_score_lineplot does not exist.'
+
+# Unit test for predict()
+tree = DecisionTreeClassifier()
+tree.fit(unit_Xtrain, unit_ytrain)
+tree.predict(unit_Xtrain)
+unit_pred = predict(tree, unit_Xtrain, unit_train_df)
+
+assert isinstance(unit_pred, pd.DataFrame), 'Return is not a dataframe'
+assert len(unit_pred.index) == len(unit_train_df.index), 'Number of instance in data frame is incorrect'
+assert len(unit_pred.columns) == len(unit_train_df.columns) + 1, 'Number of columns incorrect, check if Prediction column exists'
+assert list(unit_pred.Prediction) == list(tree.predict(unit_Xtrain)), 'Predictions not matched with scikit-learn prediction method output'
