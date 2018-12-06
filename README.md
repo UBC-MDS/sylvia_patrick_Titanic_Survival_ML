@@ -92,6 +92,10 @@ python src/04_data_summarization.py results/model/decision_tree_model.sav result
 Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 ```
 
+### Dependency Diagram of the Makefile
+
+![](Makefile.png)
+
 ### Dependencies
 
 + Python libraries:
