@@ -42,15 +42,14 @@ There are two recommended methods of running this analysis:
 4. Type the following to run the analysis:
 
 ```
-docker run --rm -e PASSWORD=test -v <REPO ABSOLUTE PATH>:/home/rstudio/titanic_predictive_analysis titanic_predictive_analysis:0.1 make -C /home/rstudio/titanic_predictive_analysis all
+docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis all
 ```
 
 5. If you would like a fresh start, type the following:
 
 ```
-docker run --rm -e PASSWORD=test -v <REPO ABSOLUTE PATH>:/home/rstudio/titanic_predictive_analysis titanic_predictive_analysis:0.1 make -C /home/rstudio/titanic_predictive_analysis clean
+docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C /home/titanic_predictive_analysis clean
 ```
-
 
 #### 2. Make (without Docker)
 
@@ -66,29 +65,47 @@ make clean
 make all
 ```
 
-The `Makefile` would run the following scripts:
+**The `Makefile` would run the following scripts:**
+
+*Step 1*: This script takes in the raw Titanic data and cleans it into a data set that fits our research question.
+
+*Inputs*: Raw training data, Raw test data
+
+*Outputs*: Cleaned training data, Cleaned test data
+
 ```
-# Step 1: This script takes in the raw Titanic data and cleans it into a data set that fits our research question.
-# Inputs: Raw training data, Raw test data
-# Outputs: Cleaned training data, Cleaned test data
 python src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
+```
 
-# Step 2: This script takes the cleaned training data and creates some visualizations that are ready for exploratory data analysis.
-# Inputs: Cleaned training data
-# Outputs: 6 figures for EDA
+*Step 2*: This script takes the cleaned training data and creates some visualizations that are ready for exploratory data analysis.
+
+*Inputs*: Cleaned training data
+
+*Outputs*: 6 figures for EDA
+```
 python src/02_data_exploratory_vis.py data/cleaned/cleaned_train.csv results/figure/
+```
 
-# Step 3: This script takes in the cleaned training data and testing data and fits a decision tree to predict which passengers survived the Titanic.
-# Inputs: Cleaned training data, Cleaned testing data
-# Outputs: Decision tree model, Predictions for training set, Predictions for testing set, Cross validation accuracy plot
+*Step 3*: This script takes in the cleaned training data and testing data and fits a decision tree to predict which passengers survived the Titanic.
+
+*Inputs*: Cleaned training data, Cleaned testing data
+
+*Outputs*: Decision tree model, Predictions for training set, Predictions for testing set, Cross validation accuracy plot
+```
 python src/03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
+```
 
-# Step 4: This script takes in the decision tree model and the predictions to create summary data of the accuracy, feature ranks, and the graphic representation of our decision tree.
-# Inputs: Decision tree model, Predictions for training set, Predictions for testing
-# Outputs: Accuracies, Ranks of the Features, Decision Tree graphic representation
+*Step 4*: This script takes in the decision tree model and the predictions to create summary data of the accuracy, feature ranks, and the graphic representation of our decision tree.
+
+*Inputs*: Decision tree model, Predictions for training set, Predictions for testing
+
+*Outputs*: Accuracies, Ranks of the Features, Decision Tree graphic representation
+```
 python src/04_data_summarization.py results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv results/
+```
 
-# Step 5: This line renders the RMarkdown file with the appropriate files created from the steps before.
+*Step 5*: This line renders the RMarkdown file with the appropriate files created from the steps before.
+```
 Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 ```
 
@@ -99,16 +116,15 @@ Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 ### Dependencies
 
 + Python libraries:
-    + argparse
-    + pandas
-    + numpy
-    + sklearn
-    + matplotlib
-    + seaborn
-    + pickle
-    + graphviz
+    + argparse v1.1
+    + pandas v0.23.4
+    + numpy v1.15.3
+    + sklearn v0.20.0
+    + matplotlib v3.0.1
+    + seaborn v0.9.0
+    + pickle v4.0
+    + graphviz v0.8.4
 
 
 + R packages:
-    + here
-    + imager
+    + here v0.1
