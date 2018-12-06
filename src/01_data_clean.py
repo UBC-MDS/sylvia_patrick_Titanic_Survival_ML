@@ -10,7 +10,7 @@
 # Usage: python 01_data_clean.py <train.csv path> <test.csv path> <gender_submission.csv path>
 #        <clean_train.csv path> <clean_test.csv path> <clean_total.csv path>
 # Example: python 01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv
-#          data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv    
+#          data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
 
 import argparse
 import pandas as pd
@@ -67,6 +67,24 @@ def process_sex(df):
 if __name__ == "__main__":
     main()
 
-# Unit testing
-unit_train_df = pd.DataFrame({'Age': [1, 2, 3, np.NaN, 5, 4], 'Fare': [2, np.NaN, 4, 5, 7, 21]})
+# UNIT TESTS
+# ==========
+
+# Toy dataset to check functions
+unit_train_df = pd.DataFrame({'Age': [1, 2, 3, np.NaN, 5, 4], 'Fare': [2, np.NaN, 4, 5, 7, 21], 'Sex': ["male", "female", "female", "male", "male", "male"]})
+
+# Unit test for calcNAN()
 assert calcNAN(unit_train_df) == {"Age": np.mean(unit_train_df.Age), "Fare": np.nanmedian(unit_train_df.Fare)}, 'The Age or Fare is incorrect.'
+assert len(calcNAN(unit_train_df)) == 2, 'Incorrect number of variables returned'
+
+# Unit test for fillNAN()
+fillNAN([unit_train_df])
+assert unit_train_df.isnull().values.any() == False, 'NaN values not replaced'
+assert unit_train_df.Age[3] == np.mean(unit_train_df.Age), 'Age NaN value not replaced correctly'
+assert unit_train_df.Fare[1] == np.nanmedian(unit_train_df.Fare), 'Fare NaN value not replaced correctly'
+
+# Unit test for process_sex()
+process_sex([unit_train_df])
+assert pd.api.types.is_numeric_dtype(unit_train_df['Sex']) == True, 'Strings not converted to numbers'
+assert np.sum(unit_train_df.Sex) == 4, 'Incorrect number of males and females'
+assert list(unit_train_df.Sex) == [1, 0, 0, 1, 1, 1], "Males and females wrongly assigned"
