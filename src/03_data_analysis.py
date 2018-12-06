@@ -147,7 +147,7 @@ assert calc_depth(unit_Xtrain, unit_ytrain) == (1, [0.7, 0.7, 0.6, 0.4, 0.4, 0.4
 assert os.path.isfile("results/figure/CV_accuracy_score_lineplot.png"), 'CV_accuracy_score_lineplot does not exist.'
 
 # Unit test for predict()
-tree = DecisionTreeClassifier()
+tree = DecisionTreeClassifier(max_depth=1, random_state=1234)
 tree.fit(unit_Xtrain, unit_ytrain)
 tree.predict(unit_Xtrain)
 unit_pred = predict(tree, unit_Xtrain, unit_train_df)
