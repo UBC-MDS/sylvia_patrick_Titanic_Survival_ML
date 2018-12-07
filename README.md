@@ -73,10 +73,11 @@ make all
 ```
 make cleans
 ```
+<br>
 
 **The `Makefile` would run the following scripts:**
 
-*Step 1*: This script takes in the raw Titanic data and cleans it into a data set that fits our research question.
+**Step 1**: This script takes in the raw Titanic data and cleans it into a data set that fits our research question.
 
 *Inputs*: Raw training data, Raw test data
 
@@ -85,9 +86,9 @@ make cleans
 ```
 python src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender_submission.csv data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv
 ```
+<br>
 
-
-*Step 2*: This script takes the cleaned training data and creates some visualizations that are ready for exploratory data analysis.
+**Step 2**: This script takes the cleaned training data and creates some visualizations that are ready for exploratory data analysis.
 
 *Inputs*: Cleaned training data
 
@@ -95,9 +96,9 @@ python src/01_data_clean.py data/raw/train.csv data/raw/test.csv data/raw/gender
 ```
 python src/02_data_exploratory_vis.py data/cleaned/cleaned_train.csv results/figure/
 ```
+<br>
 
-
-*Step 3*: This script takes in the cleaned training data and testing data and fits a decision tree to predict which passengers survived the Titanic.
+**Step 3**: This script takes in the cleaned training data and testing data and fits a decision tree to predict which passengers survived the Titanic.
 
 *Inputs*: Cleaned training data, Cleaned testing data
 
@@ -105,9 +106,9 @@ python src/02_data_exploratory_vis.py data/cleaned/cleaned_train.csv results/fig
 ```
 python src/03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/cleaned_test.csv results/
 ```
+<br>
 
-
-*Step 4*: This script takes in the decision tree model and the predictions to create summary data of the accuracy, feature ranks, and the graphic representation of our decision tree.
+**Step 4**: This script takes in the decision tree model and the predictions to create summary data of the accuracy, feature ranks, and the graphic representation of our decision tree.
 
 *Inputs*: Decision tree model, Predictions for training set, Predictions for testing
 
@@ -115,12 +116,13 @@ python src/03_data_analysis.py data/cleaned/cleaned_train.csv data/cleaned/clean
 ```
 python src/04_data_summarization.py results/model/decision_tree_model.sav results/train_prediction.csv results/test_prediction.csv results/
 ```
+<br>
 
-
-*Step 5*: This line renders the RMarkdown file with the appropriate files created from the steps before.
+**Step 5**: This line renders the RMarkdown file with the appropriate files created from the steps before.
 ```
 Rscript -e 'rmarkdown::render("docs/Titanic_Predictive_Data_Analysis.Rmd")'
 ```
+<br><br>
 
 ### Dependency Diagram of the Makefile
 
