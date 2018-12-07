@@ -37,15 +37,13 @@ There are two recommended methods of running this analysis:
 #### 1. Docker
 
 1. Install [Docker](https://www.docker.com/get-started)
-2. Download and clone this repository
+2. Download and clone this Github [repository](https://github.com/UBC-MDS/sylvia_patrick_Titanic_Survival_ML)
 3. Run the following code in terminal to download the Docker image:
 ```
 docker pull patricktung/sylvia_patrick_titanic_survival_ml
 ```
-
-4. Use the command line to navigate to the root of this repo
-5. Type the following code into terminal to run the analysis:
-
+4. Use the command line to navigate to the root of this project directory
+5. Type the following code into terminal to run the analysis: 
 ```
 docker run --rm -e PASSWORD=test -v <ABSOLUTE PATH OF REPO>:/home/titanic_predictive_analysis patricktung/sylvia_patrick_titanic_survival_ml make -C '/home/titanic_predictive_analysis' all
 ```
