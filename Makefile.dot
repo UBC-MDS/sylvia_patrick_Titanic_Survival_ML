@@ -1,4 +1,6 @@
 digraph G {
+n26[label="Makefile", color="green"];
+n25[label="Makefile.png", color="red"];
 n2[label="all", color="red"];
 n12[label="data/cleaned/cleaned_test.csv", color="green"];
 n7[label="data/cleaned/cleaned_train.csv", color="green"];
@@ -22,6 +24,8 @@ n8[label="src/01_data_clean.py", color="green"];
 n19[label="src/02_data_exploratory_vis.py", color="green"];
 n6[label="src/03_data_analysis.py", color="green"];
 n15[label="src/04_data_summarization.py", color="green"];
+n26 -> n25 ; 
+n25 -> n2 ; 
 n3 -> n2 ; 
 n11 -> n12 ; 
 n10 -> n12 ; 
