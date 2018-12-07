@@ -71,7 +71,8 @@ make all
 ```
 5. To wipe all data generated in the project for a fresh start, run the following:
 ```
-make cleans```
+make cleans
+```
 
 **The `Makefile` would run the following scripts:**
 
