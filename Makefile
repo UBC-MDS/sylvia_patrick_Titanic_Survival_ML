@@ -19,7 +19,7 @@ PREDICTIONS = results/train_prediction.csv results/test_prediction.csv
 SUMMARIZATIONS = results/accuracies.csv results/feature_ranks.csv
 
 # Run all analysis
-all : docs/Titanic_Predictive_Data_Analysis.pdf
+all : docs/Titanic_Predictive_Data_Analysis.pdf Makefile.png
 	rm -f results/figure/decision_tree
 	rm -f docs/Titanic_Predictive_Data_Analysis.tex
 
@@ -43,6 +43,10 @@ $(SUMMARIZATIONS) results/figure/decision_tree.png : src/04_data_summarization.p
 docs/Titanic_Predictive_Data_Analysis.pdf : docs/Titanic_Predictive_Data_Analysis.Rmd $(PREDICTIONS) $(SUMMARIZATIONS) $(FIGURES)
 	Rscript -e "rmarkdown::render('docs/Titanic_Predictive_Data_Analysis.Rmd')"
 
+Makefile.png : Makefile
+	makefile2graph > Makefile.dot
+	dot -Tpng Makefile.dot -o Makefile.png
+
 # Clean all output files generated
 clean :
 	rm -f $(CLEANDATA)
@@ -50,3 +54,5 @@ clean :
 	rm -f $(PREDICTIONS) results/model/decision_tree_model.sav
 	rm -f $(SUMMARIZATIONS) results/figure/decision_tree.png
 	rm -f docs/Titanic_Predictive_Data_Analysis.pdf docs/Titanic_Predictive_Data_Analysis.tex
+	rm -f Makefile.dot
+	rm -f Makefile.png

@@ -36,3 +36,16 @@ RUN apt-get install -y graphviz && pip install graphviz
 RUN apt-get update && \
     pip3 install matplotlib && \
     rm -rf /var/lib/apt/lists/*
+
+# Install git
+RUN apt-get install -y wget
+RUN apt-get install -y make git
+
+# Clone, build makefile2graph,
+# Then copy key makefile2graph files to usr/bin so they will be in $PATH
+RUN git clone https://github.com/lindenb/makefile2graph.git
+
+RUN make -C makefile2graph/.
+
+RUN cp makefile2graph/makefile2graph usr/bin
+RUN cp makefile2graph/make2graph usr/bin
